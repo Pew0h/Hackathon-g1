@@ -1,0 +1,19 @@
+/* Header Class CSS */
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+header nav img {
+    height: 50px;
+    width: 90px;
+}
+
+header nav ul {
+    display: flex;
+}
+
+header nav ul li {
+    margin-left: 20px;
+}

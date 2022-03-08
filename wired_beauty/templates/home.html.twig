@@ -2,6 +2,21 @@
 
 {% block title %} Home {% endblock %}
 
+{# STYLES #}
+{% block styles %}
+   {{ encore_entry_link_tags('home') }}
+{% endblock %}
+
+{# SCRIPTRS #}
+{# {% block scripts %}{% endblock %} #}
+
 {% block body %}
-    <img src="{{ asset('/images/logo.svg') }}" width="100" height="100">
+
+  <section id="presentation" class="container">
+
+        <img src="{{ asset('/images/classe.jpeg') }}" alt="dame classieuse">
+        <h1>New, different, better ways to research skincare</h1>
+
+  </section>
+
 {% endblock %}
