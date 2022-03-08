@@ -138,6 +138,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
+     * @return string
+     */
+    public function getPlainPassword(): string
+    {
+        return $this->plainPassword ?? '' ;
+    }
+
+    /**
      * @see UserInterface
      */
     public function eraseCredentials()
