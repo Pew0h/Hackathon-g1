@@ -6,7 +6,14 @@
     <h1>Register</h1>
 
     {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.firstname) }}
+        {{ form_row(registrationForm.lastname) }}
         {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.age) }}
+        {{ form_row(registrationForm.height) }}
+        {{ form_row(registrationForm.weight) }}
+        {{ form_row(registrationForm.latitude) }}
+        {{ form_row(registrationForm.longitude) }}
         {{ form_row(registrationForm.plainPassword, {
             label: 'Password'
         }) }}
