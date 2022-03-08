@@ -24,7 +24,7 @@ class Company
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $image;
 
-    #[ORM\OneToMany(mappedBy: 'company', targetEntity: Product::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'company', targetEntity: Product::class, orphanRemoval: false)]
     private $products;
     
     #[ORM\OneToMany(mappedBy: 'company', targetEntity: Campain::class, orphanRemoval: true)]
@@ -32,8 +32,8 @@ class Company
 
     public function __construct()
     {
-        $this->products = new ArrayCollection();
-        $this->campains = new ArrayCollection();
+        $this->products = new Collection();
+        $this->campains = new Collection();
     }
 
     public function __toString(){
@@ -81,11 +81,9 @@ class Company
         return $this;
     }
 
-    /**
-     * @return Collection<int, Product>
-     */
     public function getProducts(): Collection
     {
+        // var_dump($this->products);
         return $this->products;
     }
 
@@ -95,10 +93,10 @@ class Company
             $this->products[] = $product;
             $product->setCompany($this);
         }
-
+        
         return $this;
     }
-
+    
     public function removeProduct(Product $product): self
     {
         if ($this->products->removeElement($product)) {
@@ -108,6 +106,27 @@ class Company
             }
         }
 
+        return $this;
+    }
+
+
+    public function addCampain(Campain $campain): self
+    {
+        if (!$this->campains->contains($campain)) {
+            $this->campains[] = $campain;
+            $campain->setCompany($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCampain(Campain $campain): self
+    {
+        if ($this->campains->removeElement($campain)) {
+            if ($campain->getCompany() === $this) {
+                $campain->setCompany(null);
+            }
+        }
         return $this;
     }
 

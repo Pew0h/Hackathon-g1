@@ -26,7 +26,7 @@ class Product
     private $uvProtection;
 
     #[ORM\ManyToOne(targetEntity: Company::class, inversedBy: 'products')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private $company;
     
     #[ORM\ManyToOne(targetEntity: Campain::class, inversedBy: 'products')]

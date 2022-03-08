@@ -6,11 +6,14 @@ use App\Entity\Campain;
 use App\Entity\CampainRegistration;
 use App\Entity\Company;
 use App\Entity\Product;
+use App\Entity\Question;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use Symfony\Component\Asset\Package;
+use Symfony\Component\Asset\VersionStrategy\JsonManifestVersionStrategy;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
@@ -71,6 +74,7 @@ class DashboardController extends AbstractDashboardController {
         yield MenuItem::section();
         yield MenuItem::subMenu("Campains", "fa fa-chart-bar")->setSubItems([
             MenuItem::linkToCrud("Campains list", "fa fa-chart-bar", Campain::class),
+            MenuItem::linkToCrud("Question list", "fa fa-chart-bar", Question::class),
             MenuItem::linkToCrud("Campains Registration", "fa fa-registered", CampainRegistration::class)
         ]);
 
@@ -80,7 +84,9 @@ class DashboardController extends AbstractDashboardController {
         $assets = parent::configureAssets();
 
         return $assets
-            ->addCssFile('build/admin-app.css')
+            ->addWebpackEncoreEntry('admin-app')
             ->addJsFile('build/admin-app.js');
+            // ->addCssFile('build/admin-app.scss');
+            
     }
 }
