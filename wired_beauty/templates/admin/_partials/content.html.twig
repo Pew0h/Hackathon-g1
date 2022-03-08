@@ -36,7 +36,8 @@
             {% block main %}
                 <div class="content-panel">
                     <div class="content-panel-body without-header {{ not has_page_footer ? 'without-footer' }}">
-                        {% block page_content %}{% endblock %}
+                        {% block page_content %}
+                        {% endblock %}
                     </div>
 
                     {% if has_page_footer %}

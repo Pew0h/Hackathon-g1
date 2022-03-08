@@ -32,6 +32,11 @@ class Company
         $this->products = new ArrayCollection();
     }
 
+    public function __toString(){
+        return $this->name;
+        // return $this->id;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

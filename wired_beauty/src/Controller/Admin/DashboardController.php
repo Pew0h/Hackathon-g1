@@ -2,6 +2,9 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Campain;
+use App\Entity\Company;
+use App\Entity\Product;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -32,13 +35,14 @@ class DashboardController extends AbstractDashboardController {
                 return $this->redirectToRoute('index');
             }
         } else {
-            return $this->redirectToRoute('index');
+            return $this->redirectToRoute('login');
         }
     }
 
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
+            ->setTitle("Wired Beauty")
 
             // there's no need to define the "text direction" explicitly because
             // its default value is inferred dynamically from the user locale
@@ -49,6 +53,7 @@ class DashboardController extends AbstractDashboardController {
             // triggers an error. If this causes any issue in your backend, call this method
             // to disable this feature and remove all URL signature checks
             ->disableUrlSignatures()
+            ->renderContentMaximized()
 
             // by default, all backend URLs are generated as absolute URLs. If you
             // need to generate relative URLs instead, call this method
@@ -59,6 +64,12 @@ class DashboardController extends AbstractDashboardController {
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        yield MenuItem::linkToCrud("Utilisateurs", "fa fa-users", User::class);
+        // yield
+        yield MenuItem::linkToCrud("Campagnes", "fa fa-chart-bar", Campain::class);
+        yield MenuItem::section();
+        yield MenuItem::linkToCrud("Sociétés", "fa fa-building", Company::class);
+        yield MenuItem::linkToCrud("Produits", "fa fa-cubes", Product::class);
     }
 
     public function configureAssets(): Assets{
