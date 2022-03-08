@@ -81,7 +81,7 @@ class Company
         return $this;
     }
 
-    public function getProducts(): Collection
+    public function getProducts(): ?Collection
     {
         // var_dump($this->products);
         return $this->products;

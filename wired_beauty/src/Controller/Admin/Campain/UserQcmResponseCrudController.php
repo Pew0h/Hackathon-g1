@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Admin\Campain;
 
-use App\Entity\Question;
+use App\Entity\UserQcmResponse;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
-class QuestionCrudController extends AbstractCrudController
+class UserQcmResponseCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Question::class;
+        return UserQcmResponse::class;
     }
 
     /*

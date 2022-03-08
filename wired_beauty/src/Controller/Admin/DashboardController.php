@@ -4,10 +4,13 @@ namespace App\Controller\Admin;
 
 use App\Entity\Campain;
 use App\Entity\CampainRegistration;
+use App\Entity\Choice;
 use App\Entity\Company;
 use App\Entity\Product;
+use App\Entity\Qcm;
 use App\Entity\Question;
 use App\Entity\User;
+use App\Entity\UserQcmResponse;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -74,8 +77,14 @@ class DashboardController extends AbstractDashboardController {
         yield MenuItem::section();
         yield MenuItem::subMenu("Campains", "fa fa-chart-bar")->setSubItems([
             MenuItem::linkToCrud("Campains list", "fa fa-chart-bar", Campain::class),
+            MenuItem::linkToCrud("Campains Registration", "fa fa-registered", CampainRegistration::class),
+            MenuItem::linkToCrud("Survey Answers", "fa fa-voicemail", UserQcmResponse::class),
+        ]);
+        yield MenuItem::section();
+        yield MenuItem::subMenu("Questions", "fa fa-chart-bar")->setSubItems([
+            MenuItem::linkToCrud("Survey list", "fa fa-chart-bar", Qcm::class),
             MenuItem::linkToCrud("Question list", "fa fa-chart-bar", Question::class),
-            MenuItem::linkToCrud("Campains Registration", "fa fa-registered", CampainRegistration::class)
+            MenuItem::linkToCrud("Choices list", "fa fa-chart-bar", Choice::class),
         ]);
 
     }
