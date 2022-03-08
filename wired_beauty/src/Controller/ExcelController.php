@@ -61,7 +61,6 @@ class ExcelController extends AbstractController
                 // On incrémente le numéro de la question
             }
         }
-        dd($json);
     }
 
 }

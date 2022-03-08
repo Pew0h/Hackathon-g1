@@ -6,6 +6,7 @@ use App\Entity\Campain;
 use App\Entity\CampainRegistration;
 use App\Entity\Company;
 use App\Entity\Product;
+use App\Entity\Question;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -71,6 +72,7 @@ class DashboardController extends AbstractDashboardController {
         yield MenuItem::section();
         yield MenuItem::subMenu("Campains", "fa fa-chart-bar")->setSubItems([
             MenuItem::linkToCrud("Campains list", "fa fa-chart-bar", Campain::class),
+            MenuItem::linkToCrud("Question list", "fa fa-chart-bar", Question::class),
             MenuItem::linkToCrud("Campains Registration", "fa fa-registered", CampainRegistration::class)
         ]);
 

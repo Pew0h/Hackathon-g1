@@ -6,12 +6,14 @@ use App\Entity\Company;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class CompanyCrudController extends AbstractCrudController
 {
@@ -26,6 +28,10 @@ class CompanyCrudController extends AbstractCrudController
         return $company;
     }
 
+    public function createAction(Request $request) {
+        $company = new Company;
+    }
+
     public function configureCrud(Crud $crud): Crud {
         return $crud;
     }
@@ -36,7 +42,7 @@ class CompanyCrudController extends AbstractCrudController
             TextField::new("name")->setLabel("Title"),
             TextEditorField::new("description"),
             ImageField::new("image")->setBasePath('uploads')->setUploadDir('public/uploads'),
-            CollectionField::new("campains")
+            AssociationField::new("products")->setFormTypeOptions(['by_reference' => false,]),
         ];
     }
 }
