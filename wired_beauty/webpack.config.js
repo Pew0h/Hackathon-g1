@@ -28,6 +28,7 @@ Encore
 
     // PAGES
     .addEntry('home', './assets/pages/home')
+    .addEntry('login', './assets/pages/login')
     .addEntry('admin-app', './assets/pages/admin-app')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)

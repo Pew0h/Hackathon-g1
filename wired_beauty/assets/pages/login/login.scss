@@ -1,0 +1,29 @@
+html{
+    height: 100%;
+}
+body{
+    background: linear-gradient(217deg, #770800, #aa532d 70.71%);
+    height: 100%;
+    margin: 0;
+}
+
+.button{
+    background-color: #170304;
+    color: #fff;
+    border: 1px solid #170304;
+    width: auto;
+    padding: 5px 20px 5px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+.button:hover{
+    background-color: #770800;
+    border: 1px solid #770800;
+    transition-duration: 300ms;
+}
+
+.img-border{
+    border-radius: 1em 0 0 1em;
+}

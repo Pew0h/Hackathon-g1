@@ -2,6 +2,11 @@
 
 {% block title %}Log in!{% endblock %}
 
+{# STYLES #}
+{% block styles %}
+   {{ encore_entry_link_tags('login') }}
+{% endblock %}
+
 {% block body %}
     <link rel="stylesheet" href="{{ asset('styles/register-login.css') }}">
     <div class="container py-5 h-100">
