@@ -23,3 +23,23 @@ ul {
 h1 {
     font-family: 'Reem Kufi';
 }
+
+.button{
+    font-family: Roboto;
+    color: #fff;
+    background: #A42C23;
+    text-align: center;
+    width: auto;
+    padding: 10px 30px 10px 30px;
+    text-decoration: none;
+    border-radius: 30px;
+    border: 1px solid #A42C23;
+    font-size: 18px;
+}
+
+.button:hover{
+    color: #fff;
+    background: #262626;
+    border: 1px solid #262626;
+    transition: 300ms;
+}
