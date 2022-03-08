@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -47,6 +49,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     
     #[ORM\Column(type: 'float')]
     private $longitude;
+
+    #[ORM\OneToMany(mappedBy: 'tester', targetEntity: CampainRegistration::class, orphanRemoval: true)]
+    private $campainRegistrations;
+
+    public function __construct()
+    {
+        $this->campainRegistrations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -254,6 +264,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLongitude($longitude)
     {
         $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CampainRegistration>
+     */
+    public function getCampainRegistrations(): Collection
+    {
+        return $this->campainRegistrations;
+    }
+
+    public function addCampainRegistration(CampainRegistration $campainRegistration): self
+    {
+        if (!$this->campainRegistrations->contains($campainRegistration)) {
+            $this->campainRegistrations[] = $campainRegistration;
+            $campainRegistration->setTester($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCampainRegistration(CampainRegistration $campainRegistration): self
+    {
+        if ($this->campainRegistrations->removeElement($campainRegistration)) {
+            // set the owning side to null (unless already changed)
+            if ($campainRegistration->getTester() === $this) {
+                $campainRegistration->setTester(null);
+            }
+        }
 
         return $this;
     }
