@@ -15,15 +15,16 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class CompanyCrudController extends AbstractCrudController
+class CompanyCrudController extends AbstractBaseCrudController
 {
+
+    public function __construct() {
+        parent::__construct("Company", "Companies");
+    }
+
     public static function getEntityFqcn(): string
     {
         return Company::class;
-    }
-
-    public function configureCrud(Crud $crud): Crud {
-        return $crud;
     }
 
     public function configureFields(string $pageName): iterable
@@ -33,6 +34,7 @@ class CompanyCrudController extends AbstractCrudController
             TextEditorField::new("description"),
             ImageField::new("image")->setBasePath('uploads')->setUploadDir('public/uploads'),
             AssociationField::new("products")->setFormTypeOptions(['by_reference' => false,]),
+            AssociationField::new("campains")->setFormTypeOptions(['by_reference' => false,]),
         ];
     }
 }

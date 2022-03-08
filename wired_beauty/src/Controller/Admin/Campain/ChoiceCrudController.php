@@ -17,7 +17,7 @@ class ChoiceCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('value'),
+            TextField::new('value')->addCssClass('js-row-edit-action'),
             AssociationField::new("question")
         ];
     }

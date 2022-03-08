@@ -20,6 +20,10 @@ class Choice
     #[ORM\JoinColumn(nullable: false)]
     private $question;
 
+    public function __toString(){
+        return "#".$this->getId() . " " . $this->value;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

@@ -31,7 +31,7 @@ class Question
     }
 
     public function __toString(){
-        return $this->name;
+        return "#".$this->getId() . " " . $this->name;
     }
 
     public function getId(): ?int

@@ -13,8 +13,13 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-class CampainCrudController extends AbstractCrudController
+class CampainCrudController extends AbstractBaseCrudController
 {
+
+    public function __construct() {
+        parent::__construct("Campain");
+    }
+
     public static function getEntityFqcn(): string
     {
         return Campain::class;
