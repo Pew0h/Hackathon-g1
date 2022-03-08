@@ -33,9 +33,20 @@ class Campain
     #[ORM\OneToOne(mappedBy: 'campain', targetEntity: Qcm::class, cascade: ['persist', 'remove'])]
     private $qcm;
 
+    #[ORM\OneToOne(mappedBy: 'campain', targetEntity: Product::class, cascade: ['persist', 'remove'])]
+    private $product;
+
+    #[ORM\ManyToOne(targetEntity: Company::class, inversedBy: 'campains')]
+    #[ORM\JoinColumn(name:"company_id", referencedColumnName:"id")]
+    private $company;
+
     public function __construct()
     {
         $this->campainRegistrations = new ArrayCollection();
+    }
+
+    public function __toString() {
+        return $this->name;
     }
 
     public function getId(): ?int
@@ -134,6 +145,46 @@ class Campain
         }
 
         $this->qcm = $qcm;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of product
+     */ 
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * Set the value of product
+     *
+     * @return  self
+     */ 
+    public function setProduct($product)
+    {
+        $this->product = $product;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of company
+     */ 
+    public function getCompany()
+    {
+        return $this->company;
+    }
+
+    /**
+     * Set the value of company
+     *
+     * @return  self
+     */ 
+    public function setCompany($company)
+    {
+        $this->company = $company;
 
         return $this;
     }

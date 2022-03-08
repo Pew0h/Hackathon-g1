@@ -25,7 +25,7 @@ class ProductCrudController extends AbstractCrudController
             TextEditorField::new('description'),
             ImageField::new("image")->setBasePath("uploads")->setUploadDir("public/uploads"),
             TextField::new("uv_protection")->setLabel("Protection UV"),
-            AssociationField::new("company", "Companies"),
+            AssociationField::new("company", "Companies")->setRequired(true)->autocomplete(),
         ];
     }
 }

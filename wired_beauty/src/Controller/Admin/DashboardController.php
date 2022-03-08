@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Campain;
+use App\Entity\CampainRegistration;
 use App\Entity\Company;
 use App\Entity\Product;
 use App\Entity\User;
@@ -65,11 +66,14 @@ class DashboardController extends AbstractDashboardController {
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud("Utilisateurs", "fa fa-users", User::class);
-        // yield
-        yield MenuItem::linkToCrud("Campagnes", "fa fa-chart-bar", Campain::class);
-        yield MenuItem::section();
         yield MenuItem::linkToCrud("Sociétés", "fa fa-building", Company::class);
         yield MenuItem::linkToCrud("Produits", "fa fa-cubes", Product::class);
+        yield MenuItem::section();
+        yield MenuItem::subMenu("Campains", "fa fa-chart-bar")->setSubItems([
+            MenuItem::linkToCrud("Campains list", "fa fa-chart-bar", Campain::class),
+            MenuItem::linkToCrud("Campains Registration", "fa fa-registered", CampainRegistration::class)
+        ]);
+
     }
 
     public function configureAssets(): Assets{

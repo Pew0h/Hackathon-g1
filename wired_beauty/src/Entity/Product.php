@@ -28,6 +28,13 @@ class Product
     #[ORM\ManyToOne(targetEntity: Company::class, inversedBy: 'products')]
     #[ORM\JoinColumn(nullable: false)]
     private $company;
+    
+    #[ORM\ManyToOne(targetEntity: Campain::class, inversedBy: 'products')]
+    private $campain;
+
+    public function __toString() {
+        return $this->name;
+    }
 
     public function getId(): ?int
     {
@@ -90,6 +97,26 @@ class Product
     public function setCompany(?Company $company): self
     {
         $this->company = $company;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of campain
+     */ 
+    public function getCampain()
+    {
+        return $this->campain;
+    }
+
+    /**
+     * Set the value of campain
+     *
+     * @return  self
+     */ 
+    public function setCampain($campain)
+    {
+        $this->campain = $campain;
 
         return $this;
     }
