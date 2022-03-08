@@ -1,11 +1,28 @@
 @import "~bootstrap/scss/bootstrap-grid.scss";
+@import url('https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500;700&display=swap');
 
-/* Global CSS */
-.container {
-    max-width: 1060px;
-    margin: 10px auto;
+:root {
+    --color-primary: #A42C23;
+    --color-secondary: #DB6A39;
+    --color-black: #262626;
+    --color-gray: #A5A5A5;
+    --color-white: #FAFAFA;
+    --color-green: #3DD643;
 }
 
+html{
+    font-size: 62.5%;
+    font-family: 'Reem Kufi', sans-serif;
+    color: var(--color-black);
+}
+html * {
+    font-family: 'Reem Kufi', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 1.8rem;
+}
 
 a,
 a:link,
@@ -13,33 +30,60 @@ a:hover,
 a:visited,
 a:active {
     text-decoration: none;
-    color: inherit;
+    color: var(--color-primary);
+}
+
+h1 {
+    font-size: 6rem;
+    font-weight: bold;
+}
+h2 {
+    font-size: 4rem;
+    font-weight: bold;
+}
+h3 {
+    font-size: 2.8rem;
+    font-weight: bold;
 }
 
 ul {
     list-style: none;
 }
 
-h1 {
-    font-family: 'Reem Kufi';
+input,
+input:focus {
+    width: 100%;
+    padding: 1rem 3rem;
+    font-family: 'Reem Kufi', sans-serif;
+    border: 1px solid var(--color-black);
+    border-radius: 5rem;
 }
 
-.button{
-    font-family: Roboto;
-    color: #fff;
-    background: #A42C23;
-    text-align: center;
+input::placeholder {
+    color: var(--color-black);
+    opacity: .5;
+}
+
+.button {
     width: auto;
-    padding: 10px 30px 10px 30px;
+    padding: 1rem 3rem;
+    color: var(--color-white);
+    background-color: var(--color-primary);
+    text-align: center;
     text-decoration: none;
-    border-radius: 30px;
-    border: 1px solid #A42C23;
-    font-size: 18px;
+    border: none;
+    border-radius: 5rem;
+    cursor: pointer;
 }
 
-.button:hover{
-    color: #fff;
-    background: #262626;
-    border: 1px solid #262626;
-    transition: 300ms;
+.form-row {
+    margin-bottom: 3rem;
+
+    p{
+        margin-bottom: 1rem;
+    }
+}
+
+.w-100 {
+    width: 100%;
 }
