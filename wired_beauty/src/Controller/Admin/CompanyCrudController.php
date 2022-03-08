@@ -22,16 +22,6 @@ class CompanyCrudController extends AbstractCrudController
         return Company::class;
     }
 
-    public function createEntity(string $entityFqcn)
-    {
-        $company = new Company();
-        return $company;
-    }
-
-    public function createAction(Request $request) {
-        $company = new Company;
-    }
-
     public function configureCrud(Crud $crud): Crud {
         return $crud;
     }
@@ -39,7 +29,7 @@ class CompanyCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new("name")->setLabel("Title"),
+            TextField::new("name")->setLabel("Title")->addCssClass('js-row-edit-action'),
             TextEditorField::new("description"),
             ImageField::new("image")->setBasePath('uploads')->setUploadDir('public/uploads'),
             AssociationField::new("products")->setFormTypeOptions(['by_reference' => false,]),

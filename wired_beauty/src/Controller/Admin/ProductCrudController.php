@@ -21,7 +21,7 @@ class ProductCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('name')->setLabel("Title"),
+            TextField::new('name')->setLabel("Title")->addCssClass('js-row-edit-action'),
             TextEditorField::new('description'),
             ImageField::new("image")->setBasePath("uploads")->setUploadDir("public/uploads"),
             TextField::new("uv_protection")->setLabel("Protection UV"),

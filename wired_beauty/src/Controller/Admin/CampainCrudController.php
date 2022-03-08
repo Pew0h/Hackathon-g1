@@ -23,7 +23,7 @@ class CampainCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('name'),
+            TextField::new('name')->addCssClass('js-row-edit-action'),
             TextEditorField::new("description"),
             AssociationField::new("company"),
             AssociationField::new("product"),

@@ -12,6 +12,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use Symfony\Component\Asset\Package;
+use Symfony\Component\Asset\VersionStrategy\JsonManifestVersionStrategy;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
@@ -82,7 +84,9 @@ class DashboardController extends AbstractDashboardController {
         $assets = parent::configureAssets();
 
         return $assets
-            ->addCssFile('build/admin-app.css')
+            ->addWebpackEncoreEntry('admin-app')
             ->addJsFile('build/admin-app.js');
+            // ->addCssFile('build/admin-app.scss');
+            
     }
 }
