@@ -1,0 +1,115 @@
+{% extends '@!EasyAdmin/layout.html.twig' %}
+
+{% block head_metas %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noodp, noimageindex, notranslate, nocache" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="generator" content="EasyAdmin" />
+{% endblock head_metas %}
+
+
+{% block body %}
+    <body id="{% block body_id %}{% endblock %}" class="ea {% block body_class %}{% endblock %}">
+
+    {% block wrapper_wrapper %}
+        {% block flash_messages %}
+            {{ include(ea.templatePath('flash_messages')) }}
+        {% endblock flash_messages %}
+
+        <div class="wrapper">
+            {% block wrapper %}
+                <aside class="sidebar">
+                    <header class="main-header">
+                        {% block header %}
+                            <nav class="navbar" role="navigation">
+                                {% block header_navbar %}
+                                    <button id="navigation-toggler" type="button" aria-label="Toggle navigation">
+                                        <i class="fa fa-fw fa-bars"></i>
+                                    </button>
+
+                                    <div id="header-logo">
+                                        {% block header_logo %}
+                                            <a class="logo {{ ea.dashboardTitle|length > 14 ? 'logo-long' }}" title="{{ ea.dashboardTitle|striptags }}" href="{{ path(ea.dashboardRouteName) }}">
+                                        {% endblock header_logo %}
+                                    </div>
+                                {% endblock header_navbar %}
+                            </nav>
+                        {% endblock header %}
+                    </header>
+
+                    <nav id="main-menu">
+                        {% block sidebar %}
+                            <section class="sidebar">
+                                {% block main_menu_wrapper %}
+                                    {{ include(ea.templatePath('main_menu')) }}
+                                {% endblock main_menu_wrapper %}
+                            </section>
+
+                        {% endblock sidebar %}
+                    </nav>
+                </aside>
+
+                <div class="content-wrapper">
+                    <div id="sidebar-resizer-handler" class="resizer-handler resizer-handler-left"></div>
+
+                    {% block content %}
+                        <div class="content">
+                            {% block content_header_wrapper %}
+                                {% set has_help_message = (ea.crud.helpMessage ?? '') is not empty %}
+                                <section class="content-header">
+                                    {% block content_header %}
+                                        <div class="d-flex flex-row justify-content-between align-content-center w-100">
+                                            <div class="content-header-title">
+                                                <h1 class="title">
+                                                    {% block content_title %}{% endblock %}
+
+                                                    {% block content_help %}
+                                                        {% if has_help_message %}
+                                                            <span class="content-header-help">
+                                                                <i class="far fa-question-circle" data-toggle="tooltip" title="{{ ea.crud.helpMessage|e('html_attr') }}"></i>
+                                                            </span>
+                                                        {% endif %}
+                                                    {% endblock %}
+                                                </h1>
+                                            </div>
+
+                                            {% block page_actions_wrapper %}
+                                                <div class="page-actions">{% block page_actions %}{% endblock %}</div>
+                                            {% endblock %}
+                                        </div>
+                                    {% endblock content_header %}
+                                </section>
+                            {% endblock content_header_wrapper %}
+
+                            <section id="main" class="content-body">
+                                {% block main %}{% endblock %}
+                            </section>
+
+                            {% block content_footer_wrapper %}
+                                {% set content_footer = block('content_footer') is defined ? block('content_footer') : '' %}
+                                {% if content_footer is not empty %}
+                                    <section class="content-footer">
+                                        {{ content_footer }}
+                                    </section>
+                                {% endif %}
+                            {% endblock %}
+                        </div>
+                    {% endblock content %}
+
+                    <div id="content-resizer-handler" class="resizer-handler resizer-handler-right"></div>
+                </div>
+            {% endblock wrapper %}
+        </div>
+    {% endblock wrapper_wrapper %}
+    <script  src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+    {% block body_javascript %}{% endblock body_javascript %}
+
+    {% block configured_body_contents %}
+        {% for htmlContent in ea.assets.bodyContents ?? [] %}
+            {{ htmlContent|raw }}
+        {% endfor %}
+    {% endblock %}
+
+    </body>
+{% endblock body %}
