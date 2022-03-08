@@ -2,21 +2,38 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
-class DashboardController extends AbstractDashboardController
-{
+class DashboardController extends AbstractDashboardController {
+    
+    /**
+     * @var Security
+     */
+    private $security;
+
+    public function __construct(Security $security) {
+        $this->security = $security;
+    }
+
     #[Route('/admin', name: 'admin')]
-    public function index(): Response
-    {
-        return $this->render('admin/dashboard.html.twig');
-        return parent::index();
-        
+    public function index(): Response {
+        $user = $this->security->getUser();
+        if ($user) {
+            if ($user->checkRole($user, "ROLE_ADMIN")) {
+                return $this->render('admin/dashboard.html.twig');
+            } else {
+                return $this->redirectToRoute('index');
+            }
+        } else {
+            return $this->redirectToRoute('index');
+        }
     }
 
     public function configureDashboard(): Dashboard

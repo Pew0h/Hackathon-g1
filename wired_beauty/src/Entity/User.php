@@ -104,6 +104,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function checkRole($user, $role) {
+        $has_role = false;
+        if ($user) {
+            if (in_array($role, $user->getRoles())) {
+                $has_role = true;
+            }
+        }
+        return $has_role;
+    }
+
     /**
      * @see PasswordAuthenticatedUserInterface
      */
