@@ -1,18 +1,33 @@
 .Hero {
   .row {
+    margin-top: 150px;
+    margin-bottom: 200px;
+    display: flex;
+    align-items: center;
     position: relative;
   }
   &__container-text {
+    &__title {
+      margin: 0;
+      span {
+        color: var(--color-primary);
+      }
+    }
+
+    &__text {
+      margin: 3rem 0;
+    }
   }
 
   &__container-image {
     position: absolute;
-    right: 0;
+    right: calc(100% / 12);
     z-index: -1;
 
     img {
       width: 100%;
-      height: 650px;
+      height: 600px;
+      border-radius: 0px 70px 0px 0px;
       object-fit: cover;
       transform: scaleX(-1);
     }

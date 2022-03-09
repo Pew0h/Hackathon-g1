@@ -18,7 +18,7 @@ class Qcm
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
-    #[ORM\OneToOne(inversedBy: 'qcm', targetEntity: Campain::class, cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(inversedBy: 'qcm', targetEntity: Campain::class)]
     #[ORM\JoinColumn(nullable: false)]
     private $campain;
 
@@ -30,8 +30,9 @@ class Qcm
         $this->questions = new ArrayCollection();
     }
 
-    public function __toString(){
-        return "#".$this->getId() . " " . $this->name;
+    public function __toString()
+    {
+        return "#" . $this->getId() . " " . $this->name;
     }
 
     public function getId(): ?int

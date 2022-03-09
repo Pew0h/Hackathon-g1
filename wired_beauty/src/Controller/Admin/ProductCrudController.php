@@ -15,13 +15,16 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-class ProductCrudController extends AbstractBaseCrudController {
+class ProductCrudController extends AbstractBaseCrudController
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct("Product");
     }
 
-    public static function getEntityFqcn(): string {
+    public static function getEntityFqcn(): string
+    {
         return Product::class;
     }
 
@@ -31,8 +34,8 @@ class ProductCrudController extends AbstractBaseCrudController {
             TextField::new('name')->setLabel("Title")->addCssClass('js-row-edit-action'),
             TextEditorField::new('description'),
             ImageField::new("image")->setBasePath("uploads")->setUploadDir("public/uploads"),
-            TextField::new("uv_protection")->setLabel("Protection UV"),
-            AssociationField::new("company", "Companies")->setRequired(false),
+            TextField::new("uv_protection")->setLabel("Protection UV")->hideOnIndex(),
+            AssociationField::new("company", "Company")->setRequired(false),
             AssociationField::new("campain", "Campain")->setRequired(true),
         ];
     }

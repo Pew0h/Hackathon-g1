@@ -33,11 +33,15 @@ class Campain
     #[ORM\OneToOne(mappedBy: 'campain', targetEntity: Qcm::class, cascade: ['persist', 'remove'])]
     private $qcm;
 
-    #[ORM\OneToOne(mappedBy: 'campain', targetEntity: Product::class, cascade: ['persist', 'remove'])]
+    #[ORM\Column(type: 'text', nullable: true)]
+    private $qcm_file;
+
+    #[ORM\ManyToOne(targetEntity: Product::class, inversedBy: 'campains')]
+    #[ORM\JoinColumn(name: "product_id", referencedColumnName: "id")]
     private $product;
 
     #[ORM\ManyToOne(targetEntity: Company::class, inversedBy: 'campains')]
-    #[ORM\JoinColumn(name:"company_id", referencedColumnName:"id")]
+    #[ORM\JoinColumn(name: "company_id", referencedColumnName: "id")]
     private $company;
 
     public function __construct()
@@ -45,8 +49,9 @@ class Campain
         $this->campainRegistrations = new ArrayCollection();
     }
 
-    public function __toString() {
-        return "#".$this->getId() . " " . $this->name;
+    public function __toString()
+    {
+        return "#" . $this->getId() . " " . $this->name;
     }
 
     public function getId(): ?int
@@ -132,16 +137,18 @@ class Campain
         return $this;
     }
 
-    public function getQcm(): ?Qcm
+    public function getQcm()
     {
         return $this->qcm;
     }
 
-    public function setQcm(Qcm $qcm): self
+    public function setQcm($qcm): self
     {
-        // set the owning side of the relation if necessary
-        if ($qcm->getCampain() !== $this) {
-            $qcm->setCampain($this);
+        if (is_object($qcm)) {
+            // set the owning side of the relation if necessary
+            if ($qcm->getCampain() !== $this) {
+                $qcm->setCampain($this);
+            }
         }
 
         $this->qcm = $qcm;
@@ -151,7 +158,7 @@ class Campain
 
     /**
      * Get the value of product
-     */ 
+     */
     public function getProduct()
     {
         return $this->product;
@@ -161,7 +168,7 @@ class Campain
      * Set the value of product
      *
      * @return  self
-     */ 
+     */
     public function setProduct($product)
     {
         $this->product = $product;
@@ -171,7 +178,7 @@ class Campain
 
     /**
      * Get the value of company
-     */ 
+     */
     public function getCompany()
     {
         return $this->company;
@@ -181,10 +188,30 @@ class Campain
      * Set the value of company
      *
      * @return  self
-     */ 
+     */
     public function setCompany($company)
     {
         $this->company = $company;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of qcmFile
+     */
+    public function getQcmFile()
+    {
+        return $this->qcm_file;
+    }
+
+    /**
+     * Set the value of qcm_file
+     *
+     * @return  self
+     */
+    public function setQcmFile($qcm_file)
+    {
+        $this->qcm_file = $qcm_file;
 
         return $this;
     }

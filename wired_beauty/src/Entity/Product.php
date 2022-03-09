@@ -28,12 +28,13 @@ class Product
     #[ORM\ManyToOne(targetEntity: Company::class, inversedBy: 'products')]
     #[ORM\JoinColumn(nullable: true)]
     private $company;
-    
-    #[ORM\ManyToOne(targetEntity: Campain::class, inversedBy: 'products')]
+
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Campain::class)]
     private $campain;
 
-    public function __toString() {
-        return "#".$this->getId() . " " . $this->name;
+    public function __toString()
+    {
+        return "#" . $this->getId() . " " . $this->name;
     }
 
     public function getId(): ?int
@@ -103,7 +104,7 @@ class Product
 
     /**
      * Get the value of campain
-     */ 
+     */
     public function getCampain()
     {
         return $this->campain;
@@ -113,7 +114,7 @@ class Product
      * Set the value of campain
      *
      * @return  self
-     */ 
+     */
     public function setCampain($campain)
     {
         $this->campain = $campain;

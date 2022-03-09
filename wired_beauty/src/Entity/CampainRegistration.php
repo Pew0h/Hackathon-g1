@@ -13,7 +13,7 @@ class CampainRegistration
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'boolean', nullable: true)]
+    #[ORM\Column(type: 'text', options: ["default", "pending"])]
     private $status;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'campainRegistrations')]
@@ -27,17 +27,26 @@ class CampainRegistration
     #[ORM\JoinColumn(nullable: false)]
     private $campain;
 
+    const STATUS_PENDING = "pending";
+    const STATUS_ACCEPTED = "accepted";
+    const STATUS_REFUSED = "refused";
+
+    public function __toString()
+    {
+        return $this->campain . " " . $this->tester;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getStatus(): ?bool
+    public function getStatus(): ?string
     {
         return $this->status;
     }
 
-    public function setStatus(?bool $status): self
+    public function setStatus(?string $status): self
     {
         $this->status = $status;
 
