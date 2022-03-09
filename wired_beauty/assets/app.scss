@@ -89,7 +89,7 @@ input::placeholder {
 }
 
 .form-row {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
 
     p {
         margin-top: 0;
@@ -103,4 +103,23 @@ input::placeholder {
 
 .text-small {
     font-size: 1.6rem;
+}
+
+div.error {
+    margin: 0 0 1rem;
+    
+    &,
+    * {
+        color: var(--color-secondary);
+        font-size: 1.6rem;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+
+        li {
+            margin: 0 0 1rem;
+        }
+    }
 }

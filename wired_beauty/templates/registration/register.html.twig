@@ -20,41 +20,57 @@
                 <div class="row flex-wrap">
                     <div class="form-row col-6">
                         <p>{{ form_label(registrationForm.firstname) }}</p>
+                        <div class="error">{{ form_errors(registrationForm.firstname) }}</div>
                         {{ form_widget(registrationForm.firstname) }}
                     </div>
                     <div class="form-row col-6">
                         <p>{{ form_label(registrationForm.lastname) }}</p>
+                        <div class="error">{{ form_errors(registrationForm.lastname) }}</div>
                         {{ form_widget(registrationForm.lastname) }}
                     </div>
                     <div class="form-row col-12">
                         <p>{{ form_label(registrationForm.email) }}</p>
+                        <div class="error">{{ form_errors(registrationForm.email) }}</div>
                         {{ form_widget(registrationForm.email) }}
                     </div>
                     <div class="form-row col-4">
                         <p>{{ form_label(registrationForm.age) }}</p>
+                        <div class="error">{{ form_errors(registrationForm.age) }}</div>
                         {{ form_widget(registrationForm.age) }}
                     </div>
                     <div class="form-row col-4">
                         <p>{{ form_label(registrationForm.height) }}</p>
+                        <div class="error">{{ form_errors(registrationForm.height) }}</div>
                         {{ form_widget(registrationForm.height) }}
                     </div>
                     <div class="form-row col-4">
                         <p>{{ form_label(registrationForm.weight) }}</p>
+                        <div class="error">{{ form_errors(registrationForm.weight) }}</div>
                         {{ form_widget(registrationForm.weight) }}
                     </div>
-                    <div class="form-row col-12">
+                    <div class="search-city form-row col-12 display-results">
                         <p>{{ form_label(registrationForm.city) }}</p>
-                        {{ form_widget(registrationForm.city) }}
+                        <div class="error">{{ form_errors(registrationForm.latitude) }}</div>
+                        <div class="error">{{ form_errors(registrationForm.longitude) }}</div>
+                        <span class="search-city__container-input">{{ form_widget(registrationForm.city) }}</span>
+                        <div class="d-flex justify-content-end">
+                            <span class="search-city__remove text-small">Remove</span>
+                        </div>
+                        <div class="search-city__container-results"></div>
                     </div>
                     <div class="form-row col-12">
                         <p>{{ form_label(registrationForm.plainPassword) }}</p>
-                        {{ form_widget(registrationForm.plainPassword) }}
+                        <div class="error">{{ form_errors(registrationForm.plainPassword.first) }}</div>
+                        <p>{{ form_widget(registrationForm.plainPassword.first) }}</p>
+                        <p>{{ form_widget(registrationForm.plainPassword.second) }}</p>
                     </div>
                     <div class="form-row col-12">
                         <p class="d-flex align-items-center">{{ form_widget(registrationForm.agreeTerms) }} Agree terms</p>
                     </div>
-                    {{ form_row(registrationForm.latitude) }}
-                    {{ form_row(registrationForm.longitude) }}
+                    <div class="d-none">
+                        {{ form_row(registrationForm.latitude) }}
+                        {{ form_row(registrationForm.longitude) }}
+                    </div>
                 </div>
                 <button type="submit" class="button w-100">Register</button>
             {{ form_end(registrationForm) }}

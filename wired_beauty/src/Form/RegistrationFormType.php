@@ -40,7 +40,8 @@ class RegistrationFormType extends AbstractType
             ->add("age", NumberType::class, [
                 'attr' => [
                     'placeholder' => 'Age'
-                ]
+                ],
+
             ])
             ->add("height", NumberType::class, [
                 'attr' => [
@@ -52,8 +53,8 @@ class RegistrationFormType extends AbstractType
                     'placeholder' => 'Weight'
                 ]
             ])
-            ->add("latitude", HiddenType::class)
-            ->add("longitude", HiddenType::class)
+            ->add("latitude", TextType::class)
+            ->add("longitude", TextType::class)
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
@@ -98,7 +99,8 @@ class RegistrationFormType extends AbstractType
             ->add('city', TextType::class, [
                 'mapped' => false,
                 'attr' => [
-                    'placeholder' => 'Type to search a city'
+                    'placeholder' => 'Type to search a city',
+                    'autocomplete' => 'nope'
                 ]
             ])
         ;
