@@ -9,6 +9,7 @@ use App\Entity\Question;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -78,6 +79,9 @@ class ExcelController extends AbstractController
             }
         }
         $qcm = $this->addQCMToDatabase($array);
+
+        $filesystem = new Filesystem();
+        $filesystem->remove($file);
         return $qcm;
     }
 
