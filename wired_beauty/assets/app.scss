@@ -1,27 +1,27 @@
 @import "~bootstrap/scss/bootstrap-grid.scss";
-@import url('https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500;700&display=swap");
 
 :root {
-    --color-primary: #A42C23;
-    --color-secondary: #DB6A39;
-    --color-black: #262626;
-    --color-gray: #A5A5A5;
-    --color-white: #FAFAFA;
-    --color-green: #3DD643;
+  --color-primary: #a42c23;
+  --color-secondary: #db6a39;
+  --color-black: #262626;
+  --color-gray: #a5a5a5;
+  --color-white: #fafafa;
+  --color-green: #3dd643;
 }
 
-html{
-    font-size: 62.5%;
-    font-family: 'Reem Kufi', sans-serif;
-    color: var(--color-black);
+html {
+  font-size: 62.5%;
+  font-family: "Reem Kufi", sans-serif;
+  color: var(--color-black);
 }
 html * {
-    font-family: 'Reem Kufi', sans-serif;
-    box-sizing: border-box;
+  font-family: "Reem Kufi", sans-serif;
+  box-sizing: border-box;
 }
 
 body {
-    font-size: 1.8rem;
+  font-size: 1.8rem;
 }
 
 a,
@@ -29,78 +29,78 @@ a:link,
 a:hover,
 a:visited,
 a:active {
-    text-decoration: none;
-    color: var(--color-primary);
+  text-decoration: none;
+  color: var(--color-primary);
 }
 
 h1 {
-    font-size: 6rem;
-    line-height: 7rem;
-    font-weight: bold;
+  font-size: 6rem;
+  line-height: 7rem;
+  font-weight: bold;
 }
 h2 {
-    font-size: 4rem;
-    line-height: 6rem;
-    font-weight: bold;
+  font-size: 4rem;
+  line-height: 6rem;
+  font-weight: bold;
 }
 h3 {
-    font-size: 2.8rem;
-    line-height: 4.2rem;
-    font-weight: bold;
+  font-size: 2.8rem;
+  line-height: 4.2rem;
+  font-weight: bold;
 }
 
 ul {
-    list-style: none;
+  list-style: none;
 }
 
 input,
 input:focus {
-    padding: 1rem 3rem;
-    font-family: 'Reem Kufi', sans-serif;
-    font-size: 1.6rem;
-    border: 1px solid var(--color-black);
-    border-radius: 5rem;
+  padding: 1rem 3rem;
+  font-family: "Reem Kufi", sans-serif;
+  font-size: 1.6rem;
+  border: 1px solid var(--color-black);
+  border-radius: 5rem;
 }
 
 input:not([type="checkbox"]) {
-    width: 100%;
+  width: 100%;
 }
 
 input[type="checkbox"] {
-    margin-right: 20px;
+  margin-right: 20px;
 }
 
 input::placeholder {
-    color: var(--color-black);
-    opacity: .5;
+  color: var(--color-black);
+  opacity: 0.5;
 }
 
 .button {
-    width: auto;
-    padding: 1rem 3rem;
-    color: var(--color-white);
-    background-color: var(--color-primary);
-    text-align: center;
-    text-decoration: none;
-    font-size: 1.6rem;
-    border: none;
-    border-radius: 5rem;
-    cursor: pointer;
+  width: auto;
+  padding: 1rem 3rem;
+  color: var(--color-white);
+  background-color: var(--color-primary);
+  text-align: center;
+  text-decoration: none;
+  font-size: 1.6rem;
+  border: none;
+  border-radius: 5rem;
+  cursor: pointer;
 }
 
 .form-row {
-    margin-bottom: 3rem;
+  margin-bottom: 3rem;
 
-    p {
-        margin-top: 0;
-        margin-bottom: 1rem;
-    }
+  p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
 }
 
 .w-100 {
-    width: 100%;
+  width: 100%;
 }
 
 .text-small {
-    font-size: 1.6rem;
+  font-size: 1.6rem;
 }
