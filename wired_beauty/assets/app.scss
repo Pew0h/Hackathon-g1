@@ -76,7 +76,10 @@ input::placeholder {
   opacity: 0.5;
 }
 
+a.button,
+input.button,
 .button {
+  display: inline-block;
   width: auto;
   padding: 1rem 3rem;
   color: var(--color-white);
