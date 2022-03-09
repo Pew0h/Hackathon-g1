@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Wired Beauty</title>
-        {{ encore_entry_link_tags('app') }}
-        {{ encore_entry_link_tags('header') }}
-        {% block styles %}{% endblock %}
-    </head>
-    <body>
-    {% include '_partials/header.html.twig' %}
-    <div id="app-content">
-        {% block body %}{% endblock %}
-    </div>
-    <footer></footer>
-    {{ encore_entry_script_tags('app') }}
-    {% block scripts %}{% endblock %}
-    </body>
-</html>
+	<head>
+		<meta charset="UTF-8"/>
+		<title>
+			Wired Beauty
+		</title>
+		{{ encore_entry_link_tags('app') }}
+		{{ encore_entry_link_tags('header') }}
+		{{ encore_entry_link_tags('footer') }}
+		{% block styles %}{% endblock %}
+	</head>
+	<body>
+		{% include '_partials/header.html.twig' %}
+		<div id="app-content"> {% block body %}{% endblock %}
+			</div>
+			<footer>
+				{% include '_partials/footer.html.twig' %}
+			</footer>
+			{{ encore_entry_script_tags('app') }}
+			{% block scripts %}{% endblock %}
+		</body>
+	</html>
