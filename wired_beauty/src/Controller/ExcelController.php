@@ -24,7 +24,7 @@ class ExcelController extends AbstractController
         $this->em = $em;
     }
 
-    public function parseExcelToJson($file_path, $qcm_name)
+    public function parseExcelToJson($file_path, $campain, $qcm_name)
     {
         $file = new File("Excels/" . $file_path);
         $reader = new Xlsx();
@@ -60,17 +60,15 @@ class ExcelController extends AbstractController
                 }
             }
         }
-        $qcm = $this->addQCMToDatabase($array, $qcm_name);
+        $qcm = $this->addQCMToDatabase($array, $campain, $qcm_name);
 
         $filesystem = new Filesystem();
         $filesystem->remove($file);
         return $qcm;
     }
 
-    public function addQCMToDatabase(array $array, $qcm_name)
+    public function addQCMToDatabase(array $array, $campain, $qcm_name)
     {
-        // Get first campain for example
-        $campain = $this->em->getRepository(Campain::class)->find(1);
 
         // Create QCM
         $qcm = new Qcm();

@@ -52,7 +52,7 @@ class CampainCrudController extends AbstractBaseCrudController
             $file_path = $entityInstance->getQcmFile();
             $excelController = new ExcelController($this->em);
             $qcm_name = $entityInstance->getName() . " | " . explode(".", $entityInstance->getQcmFile())[0];
-            $qcm = $excelController->parseExcelToJson($file_path, $qcm_name);
+            $qcm = $excelController->parseExcelToJson($file_path, $entityInstance, $qcm_name);
             $entityInstance->setQcm($qcm);
         }
 
