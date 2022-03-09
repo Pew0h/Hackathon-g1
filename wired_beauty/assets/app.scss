@@ -21,7 +21,8 @@ html * {
 }
 
 body {
-  font-size: 1.8rem;
+    margin: 0;
+    font-size: 1.8rem;
 }
 
 a,
@@ -86,6 +87,12 @@ input::placeholder {
   border: none;
   border-radius: 5rem;
   cursor: pointer;
+  transform: scale(1);
+  transition: transform .3s ease;
+
+  &:hover {
+      transform: scale(1.1);
+  }
 }
 
 .form-row {

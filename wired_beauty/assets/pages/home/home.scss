@@ -1,4 +1,6 @@
 .Hero {
+  height: calc(100vh - 10rem);
+
   .row {
     margin-top: 150px;
     margin-bottom: 200px;
@@ -6,6 +8,7 @@
     align-items: center;
     position: relative;
   }
+
   &__container-text {
     &__title {
       margin: 0;
@@ -32,4 +35,9 @@
       transform: scaleX(-1);
     }
   }
+}
+
+
+footer {
+  margin-top: 0;
 }

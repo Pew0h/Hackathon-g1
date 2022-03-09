@@ -1,29 +1,33 @@
 /* Header Class CSS */
 
-header nav {
-  display: flex;
-  justify-content: space-between;
-  margin: 3rem 0rem;
-}
+header {
 
-header nav img {
-  height: 4rem;
-  width: auto;
-}
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 10rem;
+    padding: 2rem 0;
 
-header .button {
-  color: var(--color-white);
-}
+    a:not(.button) {
+      color: var(--color-black) !important;
+    }
 
-header nav a:not(.button) {
-  color: var(--color-black) !important;
-}
+    img {
+      height: 4rem;
+      width: auto;
+    }
 
-header nav ul {
-  display: flex;
-  align-items: center;
-}
+    ul {
+      display: flex;
 
-header nav ul li {
-  margin-left: 20px;
+      li {
+        margin-left: 20px;
+      }
+    }
+  }
+
+  .button {
+    color: var(--color-white);
+  }
 }

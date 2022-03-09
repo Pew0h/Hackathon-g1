@@ -53,8 +53,12 @@ class RegistrationFormType extends AbstractType
                     'placeholder' => 'Weight'
                 ]
             ])
-            ->add("latitude", TextType::class)
-            ->add("longitude", TextType::class)
+            ->add("latitude", TextType::class, [
+                'required' => false
+            ])
+            ->add("longitude", TextType::class, [
+                'required' => false
+            ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
