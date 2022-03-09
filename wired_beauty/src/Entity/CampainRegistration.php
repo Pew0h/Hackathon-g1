@@ -13,7 +13,7 @@ class CampainRegistration
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'text', options: ["default", "pending"])]
+    #[ORM\Column(type: 'integer', options: ["default" => 0], nullable: false,)]
     private $status;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'campainRegistrations')]
@@ -27,9 +27,9 @@ class CampainRegistration
     #[ORM\JoinColumn(nullable: false)]
     private $campain;
 
-    const STATUS_PENDING = "pending";
-    const STATUS_ACCEPTED = "accepted";
-    const STATUS_REFUSED = "refused";
+    const STATUS_PENDING = 0;
+    const STATUS_ACCEPTED = 1;
+    const STATUS_REFUSED = 2;
 
     public function __toString()
     {

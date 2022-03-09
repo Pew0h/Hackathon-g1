@@ -35,8 +35,8 @@ class ProductCrudController extends AbstractBaseCrudController
             TextEditorField::new('description'),
             ImageField::new("image")->setBasePath("uploads")->setUploadDir("public/uploads"),
             TextField::new("uv_protection")->setLabel("Protection UV")->hideOnIndex(),
-            AssociationField::new("company", "Company")->setRequired(false),
-            AssociationField::new("campain", "Campain")->setRequired(true),
+            AssociationField::new("company", "Company")->setRequired(true),
+            AssociationField::new("campain", "Campain")->setRequired(false),
         ];
     }
 }

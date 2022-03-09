@@ -9,28 +9,32 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use Symfony\Component\Security\Core\Security;
 
-class AbstractBaseCrudController extends AbstractCrudController {
+class AbstractBaseCrudController extends AbstractCrudController
+{
 
     private $className;
     private $pageTitle;
     private $addLabel;
 
-    public function __construct($className = "", $pageTitle = "", $addLabel = "") {
-        if ($this->className != "") {
+    public function __construct($className = "", $pageTitle = "", $addLabel = "")
+    {
+        if ($className != "") {
             $this->className = $className;
             $pageTitle === "" ? $this->pageTitle = $this->className . "s" : $this->pageTitle = $pageTitle;
             $addLabel === "" ? $this->addLabel = "Add new " . $this->className : $this->addLabel = $addLabel;
-        } 
+        }
     }
 
-    public static function getEntityFqcn(): string {
+    public static function getEntityFqcn(): string
+    {
         return "";
     }
-    
-    public function configureCrud(Crud $crud): Crud {
+
+    public function configureCrud(Crud $crud): Crud
+    {
         if ($this->pageTitle != "") {
             return $crud
-            ->setPageTitle("index", $this->pageTitle);
+                ->setPageTitle("index", $this->pageTitle);
         } else {
             return $crud;
         }
@@ -40,9 +44,9 @@ class AbstractBaseCrudController extends AbstractCrudController {
     {
         if ($this->addLabel != "") {
             return $actions
-            ->update(Crud::PAGE_INDEX, Action::NEW, function (Action $action) {
-                return $action->setLabel($this->addLabel);
-            });
+                ->update(Crud::PAGE_INDEX, Action::NEW, function (Action $action) {
+                    return $action->setLabel($this->addLabel);
+                });
         } else {
             return $actions;
         }

@@ -10,6 +10,11 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class QcmCrudController extends AbstractBaseCrudController
 {
+    public function __construct()
+    {
+        parent::__construct("Qcm", "Survey Forms", "Add new survey form");
+    }
+
     public static function getEntityFqcn(): string
     {
         return Qcm::class;
