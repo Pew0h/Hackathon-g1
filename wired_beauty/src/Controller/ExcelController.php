@@ -85,7 +85,7 @@ class ExcelController extends AbstractController
         }
 
         //Creation of the QCM with the associated questions and answers
-        for ($i = 1; $i < $questions_numbers; $i++) {
+        for ($i = 1; $i < $questions_numbers + 1; $i++) {
             // Question creation
             $questions = new Question();
             $questions->setQcm($qcm);
