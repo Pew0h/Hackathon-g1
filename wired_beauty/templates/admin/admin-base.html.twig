@@ -1,113 +1,116 @@
 {% extends '@!EasyAdmin/layout.html.twig' %}
 
 {% block head_metas %}
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noodp, noimageindex, notranslate, nocache" />
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <meta name="generator" content="EasyAdmin" />
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noodp, noimageindex, notranslate, nocache"/>
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<meta name="generator" content="EasyAdmin"/>
 {% endblock head_metas %}
 
 
 {% block body %}
-    <div class="wrapper">
-        <aside class="sidebar">
-            <header class="main-header">
-                {% block header %}
-                    <nav class="navbar" role="navigation">
-                        {% block header_navbar %}
-                            <button id="navigation-toggler" type="button" aria-label="Toggle navigation">
-                                <i class="fa fa-fw fa-bars"></i>
-                            </button>
+	<div class="wrapper">
+		<aside class="sidebar">
+			<header class="main-header">
+				{% block header %}
+					<nav class="navbar" role="navigation">
+						{% block header_navbar %}
+							<button id="navigation-toggler" type="button" aria-label="Toggle navigation">
+								<i class="fa fa-fw fa-bars"></i>
+							</button>
 
-                            <div id="header-logo">
-                                {% block header_logo %}
-                                    <a class="logo {{ ea.dashboardTitle|length > 14 ? 'logo-long' }}" title="{{ ea.dashboardTitle|striptags }}" href="{{ path(ea.dashboardRouteName) }}">
-                                        {{ ea.dashboardTitle }}
-                                    </a>
-                                {% endblock header_logo %}
-                            </div>
-                        {% endblock header_navbar %}
-                    </nav>
-                {% endblock header %}
-            </header>
+							<div id="header-logo">
+								{% block header_logo %}
+									<a class="logo {{ ea.dashboardTitle|length > 14 ? 'logo-long' }}" title="{{ ea.dashboardTitle|striptags }}" href="{{ path(ea.dashboardRouteName) }}">
+										{{ ea.dashboardTitle }}
+									</a>
+								{% endblock header_logo %}
+							</div>
+						{% endblock header_navbar %}
+					</nav>
+				{% endblock header %}
+			</header>
 
-            <nav id="main-menu">
-                {% block sidebar %}
-                    {% block main_menu_wrapper %}
-                        {{ include(ea.templatePath('main_menu')) }}
-                    {% endblock main_menu_wrapper %}
-                {% endblock sidebar %}
-            </nav>
-        </aside>
-        <section class='main-content'>
-            <aside class="content-top">
-                <div class="navbar-custom-menu">
-                    <div class="dropdown user-menu-wrapper ">
-                        <a class="user-details" type="button" data-bs-toggle="dropdown" data-bs-offset="0,5" aria-expanded="false">
-                            <span class="user-avatar">
-                                <span class="fa-stack">
-                                    <i class="user-avatar-icon-background fas fa-square fa-stack-2x"></i>
-                                    <i class="user-avatar-icon-foreground fa fa-user fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </span>
-                            <span class="user-name">loudefaut02@outlook.fr</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li class="dropdown-user-details">
-                                <div>
-                                    <span class="user-avatar">
-                                        <span class="fa-stack">
-                                            <i class="user-avatar-icon-background fas fa-square fa-stack-2x"></i>
-                                            <i class="user-avatar-icon-foreground fa fa-user fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </span>
-                                </div>
-                                <div>
-                                    <span class="user-label">Logged in as</span>
-                                    <span class="user-name">loudefaut02@outlook.fr</span>
-                                </div>
-                            </li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li></li>
-                            <li>
-                                <a href="/logout" class="dropdown-item user-action " target="_self" rel="" referrerpolicy="origin-when-cross-origin">
-                                    <i class="fa fa-fw fa-sign-out"></i>                                        <span>Sign out</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="dropdown dropdown-appearance">
-                    <a class="dropdown-appearance-button" type="button" data-bs-toggle="dropdown" data-bs-offset="0,5" aria-expanded="false">
-                        <i class="fas fa-adjust"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li class="dropdown-appearance-label">
-                            <span>Appearance</span>
-                        </li>
-                        <li>
-                            <a href="#" class="dropdown-item active" data-ea-color-scheme="light">
-                                <i class="far fa-sun"></i> <span>Light</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="dropdown-item" data-ea-color-scheme="dark">
-                                <i class="far fa-moon"></i> <span>Dark</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="dropdown-item" data-ea-color-scheme="auto">
-                                <i class="fas fa-desktop"></i> <span>Auto</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </aside>
-            <div class="content-wrapper">
-                {% block content %}
-                {% endblock %}
-            </div>
-        </section>
-    </div>
+			<nav id="main-menu">
+				{% block sidebar %}
+					{% block main_menu_wrapper %}
+						{{ include(ea.templatePath('main_menu')) }}
+					{% endblock main_menu_wrapper %}
+				{% endblock sidebar %}
+			</nav>
+		</aside>
+		<section class='main-content'>
+			<aside class="content-top">
+				<div class="navbar-custom-menu">
+					<div class="dropdown user-menu-wrapper ">
+						<a class="user-details" type="button" data-bs-toggle="dropdown" data-bs-offset="0,5" aria-expanded="false">
+							<span class="user-avatar">
+								<span class="fa-stack">
+									<i class="user-avatar-icon-background fas fa-square fa-stack-2x"></i>
+									<i class="user-avatar-icon-foreground fa fa-user fa-stack-1x fa-inverse"></i>
+								</span>
+							</span>
+							<span class="user-name">{{ user.fullname }}</span>
+						</a>
+						<ul class="dropdown-menu dropdown-menu-start">
+							<li class="dropdown-user-details">
+								<div>
+									<span class="user-avatar">
+										<span class="fa-stack">
+											<i class="user-avatar-icon-background fas fa-square fa-stack-2x"></i>
+											<i class="user-avatar-icon-foreground fa fa-user fa-stack-1x fa-inverse"></i>
+										</span>
+									</span>
+								</div>
+								<div>
+									<span class="user-label">Logged in as</span>
+									<span class="user-name">{{ user.email }}</span>
+								</div>
+							</li>
+							<li><hr class="dropdown-divider"></li>
+							<li></li>
+							<li>
+								<a href="/logout" class="dropdown-item user-action " target="_self" rel="" referrerpolicy="origin-when-cross-origin">
+									<i class="fa fa-fw fa-sign-out"></i>
+									<span>Sign out</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="dropdown dropdown-appearance">
+					<a class="dropdown-appearance-button" type="button" data-bs-toggle="dropdown" data-bs-offset="0,5" aria-expanded="false">
+						<i class="fas fa-adjust"></i>
+					</a>
+					<ul class="dropdown-menu dropdown-menu-end">
+						<li class="dropdown-appearance-label">
+							<span>Appearance</span>
+						</li>
+						<li>
+							<a href="#" class="dropdown-item active" data-ea-color-scheme="light">
+								<i class="far fa-sun"></i>
+								<span>Light</span>
+							</a>
+						</li>
+						<li>
+							<a href="#" class="dropdown-item" data-ea-color-scheme="dark">
+								<i class="far fa-moon"></i>
+								<span>Dark</span>
+							</a>
+						</li>
+						<li>
+							<a href="#" class="dropdown-item" data-ea-color-scheme="auto">
+								<i class="fas fa-desktop"></i>
+								<span>Auto</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</aside>
+			<div class="content-wrapper">
+				{% block content %}{% endblock %}
+			</div>
+		</section>
+	</div>
 {% endblock body %}

@@ -27,6 +27,11 @@ class CampainRegistration
     #[ORM\JoinColumn(nullable: false)]
     private $campain;
 
+    public function __toString()
+    {
+        return $this->campain . " " . $this->tester;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

@@ -20,7 +20,8 @@ class UserCrudController extends AbstractBaseCrudController
 {
     public $hasherPassword;
 
-    public function __construct(UserPasswordHasherInterface $passwordHasher) {
+    public function __construct(UserPasswordHasherInterface $passwordHasher)
+    {
         parent::__construct("User");
         $this->hasherPassword = $passwordHasher;
     }
@@ -39,12 +40,12 @@ class UserCrudController extends AbstractBaseCrudController
             TextField::new("email")->setSortable(true),
             TextField::new('password')->setFormType(PasswordType::class)->hideWhenUpdating()->hideOnIndex()->hideOnDetail(),
             ChoiceField::new('roles')
-            ->setRequired(true)
-            ->allowMultipleChoices()
-            ->setChoices([
-                'Admin'           => User::ROLE_ADMIN,
-                'Tester'       => User::ROLE_USER
-            ]),
+                ->setRequired(true)
+                ->allowMultipleChoices()
+                ->setChoices([
+                    'Admin'           => User::ROLE_ADMIN,
+                    'Tester'       => User::ROLE_USER
+                ]),
             NumberField::new("age"),
             NumberField::new("height")->onlyOnForms(),
             NumberField::new("weight")->onlyOnForms(),
@@ -60,9 +61,9 @@ class UserCrudController extends AbstractBaseCrudController
             $this->hasherPassword->hashPassword(
                 $entityInstance,
                 $entityInstance->getPassword()
-                )
-            );
-            
+            )
+        );
+
         parent::persistEntity($entityManager, $entityInstance);
     }
 
@@ -72,10 +73,9 @@ class UserCrudController extends AbstractBaseCrudController
             $this->hasherPassword->hashPassword(
                 $entityInstance,
                 $entityInstance->getPassword()
-                )
-            );
-            
-        dd($entityInstance, $entityManager);
+            )
+        );
+
         parent::persistEntity($entityManager, $entityInstance);
     }
 }

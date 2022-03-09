@@ -11,6 +11,8 @@ use App\Entity\Qcm;
 use App\Entity\Question;
 use App\Entity\User;
 use App\Entity\UserQcmResponse;
+use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -21,23 +23,59 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 
-class DashboardController extends AbstractDashboardController {
-    
+class DashboardController extends AbstractDashboardController
+{
+
     /**
      * @var Security
      */
     private $security;
 
-    public function __construct(Security $security) {
+    private EntityManagerInterface $em;
+
+    public function __construct(Security $security, EntityManagerInterface $em)
+    {
         $this->security = $security;
+        $this->em = $em;
     }
 
     #[Route('/admin', name: 'admin')]
-    public function index(): Response {
+    public function index(): Response
+    {
         $user = $this->security->getUser();
         if ($user) {
             if ($user->checkRole($user, "ROLE_ADMIN")) {
-                return $this->render('admin/dashboard.html.twig');
+
+                $users_dashboard = $this->em->getRepository(User::class)->findAll();
+                $companies_dashboard = $this->em->getRepository(Company::class)->findAll();
+                $products_dashboard = $this->em->getRepository(Product::class)->findAll();
+
+                $campains_dashboard = $this->em->getRepository(Campain::class)->findAll();
+                $campainsRegistration_dashboard = $this->em->getRepository(CampainRegistration::class)->findAll();
+                $surveyAnswer_dashboard = $this->em->getRepository(UserQcmResponse::class)->findAll();
+
+                $questions_dashboard = $this->em->getRepository(Question::class)->findAll();
+                $surveys_dashboard = $this->em->getRepository(Qcm::class)->findAll();
+                $choices_dashboard = $this->em->getRepository(Choice::class)->findAll();
+
+                return $this->render('admin/dashboard.html.twig', [
+                    "user"  => $user,
+                    "entities" => [
+                        "users" => $users_dashboard,
+                        "companies" => $companies_dashboard,
+                        "products" => $products_dashboard,
+                    ],
+                    "campains" => [
+                        "campains"  => $campains_dashboard,
+                        "registrations" => $campainsRegistration_dashboard,
+                        "survey_answer" => $surveyAnswer_dashboard,
+                    ],
+                    "questions" => [
+                        "surveys" => $surveys_dashboard,
+                        "questions"  => $questions_dashboard,
+                        "choices" => $choices_dashboard,
+                    ]
+                ]);
             } else {
                 return $this->redirectToRoute('index');
             }
@@ -64,8 +102,7 @@ class DashboardController extends AbstractDashboardController {
 
             // by default, all backend URLs are generated as absolute URLs. If you
             // need to generate relative URLs instead, call this method
-            ->generateRelativeUrls()
-        ;
+            ->generateRelativeUrls();
     }
 
     public function configureMenuItems(): iterable
@@ -86,16 +123,16 @@ class DashboardController extends AbstractDashboardController {
             MenuItem::linkToCrud("Question list", "fa fa-chart-bar", Question::class),
             MenuItem::linkToCrud("Choices list", "fa fa-chart-bar", Choice::class),
         ]);
-
     }
 
-    public function configureAssets(): Assets{
+    public function configureAssets(): Assets
+    {
         $assets = parent::configureAssets();
 
         return $assets
             ->addWebpackEncoreEntry('admin-app')
             ->addJsFile('build/admin-app.js');
-            // ->addCssFile('build/admin-app.scss');
-            
+        // ->addCssFile('build/admin-app.scss');
+
     }
 }

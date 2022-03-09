@@ -30,8 +30,9 @@ class Question
         $this->choices = new ArrayCollection();
     }
 
-    public function __toString(){
-        return "#".$this->getId() . " " . $this->name;
+    public function __toString()
+    {
+        return "#" . $this->getId() . " " . $this->name;
     }
 
     public function getId(): ?int
