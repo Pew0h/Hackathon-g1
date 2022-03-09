@@ -5,7 +5,12 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -17,14 +22,38 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add("firstname")
-            ->add("lastname")
-            ->add('email')
-            ->add("age")
-            ->add("height")
-            ->add("weight")
-            ->add("latitude")
-            ->add("longitude")
+            ->add("firstname", TextType::class, [
+                'attr' => [
+                    'placeholder' => 'Firstname'
+                ]
+            ])
+            ->add("lastname", TextType::class, [
+                'attr' => [
+                    'placeholder' => 'Lastname'
+                ]
+            ])
+            ->add('email', EmailType::class, [
+                'attr' => [
+                    'placeholder' => 'Email'
+                ]
+            ])
+            ->add("age", NumberType::class, [
+                'attr' => [
+                    'placeholder' => 'Age'
+                ]
+            ])
+            ->add("height", NumberType::class, [
+                'attr' => [
+                    'placeholder' => 'Height'
+                ]
+            ])
+            ->add("weight", NumberType::class, [
+                'attr' => [
+                    'placeholder' => 'Weight'
+                ]
+            ])
+            ->add("latitude", HiddenType::class)
+            ->add("longitude", HiddenType::class)
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
@@ -33,11 +62,27 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('plainPassword', PasswordType::class, [
+            ->add('plainPassword', RepeatedType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password'],
+                'type' => PasswordType::class,
+                'attr' => [
+                    'placeholder' => 'Password',
+                    'autocomplete' => 'new-password'
+                ],
+                'first_options'  => [
+                    'label' => false,
+                    'attr' => [
+                        'placeholder' => 'Password'
+                    ]
+                ],
+                'second_options' => [
+                    'label' => false,
+                    'attr' => [
+                        'placeholder' => 'Confirm password'
+                    ]
+                ],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',
@@ -49,6 +94,12 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
+            ])
+            ->add('city', TextType::class, [
+                'mapped' => false,
+                'attr' => [
+                    'placeholder' => 'Type to search a city'
+                ]
             ])
         ;
     }
