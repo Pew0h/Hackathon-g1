@@ -51,10 +51,11 @@ class CampainCrudController extends AbstractBaseCrudController
         if ($entityInstance->getQcmFile()) {
             $file_path = $entityInstance->getQcmFile();
             $excelController = new ExcelController($this->em);
-            $qcm = $excelController->parseExcelToJson($file_path);
+            $qcm_name = $entityInstance->getName() . " | " . explode(".", $entityInstance->getQcmFile())[0];
+            $qcm = $excelController->parseExcelToJson($file_path, $qcm_name);
+            $entityInstance->setQcm($qcm);
         }
 
-        $entityInstance->setQcm($qcm);
         parent::persistEntity($entityManager, $entityInstance);
     }
 }

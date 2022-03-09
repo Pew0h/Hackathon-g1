@@ -24,25 +24,7 @@ class ExcelController extends AbstractController
         $this->em = $em;
     }
 
-
-    #[Route('/test', name: 'test')]
-    public function viewTest(): Response
-    {
-        return $this->render('test.html.twig');
-    }
-
-    #[Route('/upload-excel-file', name: 'upload-excel-file')]
-    public function uploadExcelFile(Request $request): Response
-    {
-        $file = $request->files->get('excelFile');
-        if (empty($file)) {
-            return $this->render('test.html.twig', ['error' => 'Empty file']);
-        }
-
-        $this->parseExcelToJson($file);
-    }
-
-    public function parseExcelToJson($file_path)
+    public function parseExcelToJson($file_path, $qcm_name)
     {
         $file = new File("Excels/" . $file_path);
         $reader = new Xlsx();
@@ -78,22 +60,21 @@ class ExcelController extends AbstractController
                 }
             }
         }
-        $qcm = $this->addQCMToDatabase($array);
+        $qcm = $this->addQCMToDatabase($array, $qcm_name);
 
         $filesystem = new Filesystem();
         $filesystem->remove($file);
         return $qcm;
     }
 
-    public function addQCMToDatabase(array $array)
+    public function addQCMToDatabase(array $array, $qcm_name)
     {
         // Get first campain for example
         $campain = $this->em->getRepository(Campain::class)->find(1);
 
         // Create QCM
-
         $qcm = new Qcm();
-        $qcm->setName('QCM TEST 2');
+        $qcm->setName($qcm_name);
         $qcm->setCampain($campain);
         $this->em->persist($qcm);
 

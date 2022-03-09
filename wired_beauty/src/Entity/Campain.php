@@ -36,7 +36,7 @@ class Campain
     #[ORM\Column(type: 'text', nullable: true)]
     private $qcm_file;
 
-    #[ORM\OneToOne(mappedBy: 'campain', targetEntity: Product::class, cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(targetEntity: Product::class, inversedBy: 'campains')]
     #[ORM\JoinColumn(name: "product_id", referencedColumnName: "id")]
     private $product;
 
