@@ -26,18 +26,19 @@ class Company
 
     #[ORM\OneToMany(mappedBy: 'company', targetEntity: Product::class, orphanRemoval: false)]
     private $products;
-    
+
     #[ORM\OneToMany(mappedBy: 'company', targetEntity: Campain::class, orphanRemoval: true)]
     private $campains;
 
     public function __construct()
     {
-        $this->products = new Collection();
-        $this->campains = new Collection();
+        // $this->products = new Collection();
+        // $this->campains = new Collection();
     }
 
-    public function __toString(){
-        return "#".$this->getId() . " " . $this->name;
+    public function __toString()
+    {
+        return "#" . $this->getId() . " " . $this->name;
     }
 
     public function getId(): ?int
@@ -83,7 +84,6 @@ class Company
 
     public function getProducts(): ?Collection
     {
-        // var_dump($this->products);
         return $this->products;
     }
 
@@ -93,10 +93,10 @@ class Company
             $this->products[] = $product;
             $product->setCompany($this);
         }
-        
+
         return $this;
     }
-    
+
     public function removeProduct(Product $product): self
     {
         if ($this->products->removeElement($product)) {
@@ -132,7 +132,7 @@ class Company
 
     /**
      * Get the value of campains
-     */ 
+     */
     public function getCampains()
     {
         return $this->campains;
@@ -142,7 +142,7 @@ class Company
      * Set the value of campains
      *
      * @return  self
-     */ 
+     */
     public function setCampains($campains)
     {
         $this->campains = $campains;

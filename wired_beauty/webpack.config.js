@@ -30,6 +30,7 @@ Encore.enableSassLoader()
   .addEntry("home", "./assets/pages/home")
   .addEntry("login", "./assets/pages/login")
   .addEntry("register", "./assets/pages/register")
+  .addEntry("campains-listing", "./assets/pages/campains-listing")
   .addEntry("admin-app", "./assets/pages/admin-app")
 
   // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)

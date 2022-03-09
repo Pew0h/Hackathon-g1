@@ -17,7 +17,7 @@ class CampainRegistrationCrudController extends AbstractBaseCrudController
 
     public function __construct()
     {
-        parent::__construct("CampainRegistration", "Campain registrations", "Add new campain registration");
+        parent::__construct("Campain Registration", "Campain registrations", "Add new campain registration");
     }
 
     public static function getEntityFqcn(): string
