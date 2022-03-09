@@ -1,0 +1,50 @@
+.search-city {
+
+    input {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__container-results {
+        display: none;
+        margin-top: 1rem;
+        padding: 1rem 3rem;
+        font-family: "Reem Kufi", sans-serif;
+        font-size: 1.6rem;
+        border: 1px solid var(--color-gray);
+        border-radius: 2.3rem;
+
+        &.active {
+            display: block;
+        }
+
+        span {
+            display: block;
+            padding-bottom: .5rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: color .3s ease;
+
+            &:hover {
+                color: var(--color-primary);
+            }
+
+            &:last-child {
+                padding-bottom: 0;
+            }
+        }
+    }
+
+    &__remove {
+        visibility: hidden;
+        margin-top: .5rem;
+        cursor: pointer;
+
+        &.active {
+            visibility: visible;
+        }
+    }
+}
