@@ -1,9 +1,4 @@
 @import "~bootstrap/scss/bootstrap-grid.scss";
-<<<<<<< HEAD
-@import url('https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500;700&display=swap%27');
-
-/* Global CSS */
-=======
 @import url('https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500;700&display=swap');
 
 :root {
@@ -28,7 +23,6 @@ html * {
 body {
     font-size: 1.8rem;
 }
->>>>>>> d8346a346f010807d411d84c86aa41c6cde0126b
 
 a,
 a:link,
@@ -41,14 +35,17 @@ a:active {
 
 h1 {
     font-size: 6rem;
+    line-height: 7rem;
     font-weight: bold;
 }
 h2 {
     font-size: 4rem;
+    line-height: 6rem;
     font-weight: bold;
 }
 h3 {
     font-size: 2.8rem;
+    line-height: 4.2rem;
     font-weight: bold;
 }
 
@@ -56,21 +53,21 @@ ul {
     list-style: none;
 }
 
-<<<<<<< HEAD
-h1 {
-    font-family: 'Reem Kufi', sans-serif;
-}
-
-body {
-    font-family: 'Reem Kufi', sans-serif;
-=======
 input,
 input:focus {
-    width: 100%;
     padding: 1rem 3rem;
     font-family: 'Reem Kufi', sans-serif;
+    font-size: 1.6rem;
     border: 1px solid var(--color-black);
     border-radius: 5rem;
+}
+
+input:not([type="checkbox"]) {
+    width: 100%;
+}
+
+input[type="checkbox"] {
+    margin-right: 20px;
 }
 
 input::placeholder {
@@ -85,6 +82,7 @@ input::placeholder {
     background-color: var(--color-primary);
     text-align: center;
     text-decoration: none;
+    font-size: 1.6rem;
     border: none;
     border-radius: 5rem;
     cursor: pointer;
@@ -93,12 +91,16 @@ input::placeholder {
 .form-row {
     margin-bottom: 3rem;
 
-    p{
+    p {
+        margin-top: 0;
         margin-bottom: 1rem;
     }
 }
 
 .w-100 {
     width: 100%;
->>>>>>> d8346a346f010807d411d84c86aa41c6cde0126b
+}
+
+.text-small {
+    font-size: 1.6rem;
 }

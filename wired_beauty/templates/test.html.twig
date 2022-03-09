@@ -14,8 +14,10 @@
         <div>
             <button class="mt-3" type="submit">Send</button>
         </div>
-        {% if error %}
-            <label class="text-danger pt-3">{{ error }}</label>
+        {% if error is defined %}
+            {% if error %}
+                <label class="text-danger pt-3">{{ error }}</label>
+            {% endif %}
         {% endif %}
     </form>
 {% endblock %}

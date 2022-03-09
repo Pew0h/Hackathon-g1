@@ -2,23 +2,63 @@
 
 {% block title %}Register{% endblock %}
 
+{# STYLES #}
+{% block styles %}
+   {{ encore_entry_link_tags('register') }}
+{% endblock %}
+
+{# SCRIPTS #}
+{% block scripts %}
+   {{ encore_entry_script_tags('register') }}
+{% endblock %}
+
 {% block body %}
-    <h1>Register</h1>
+    <div class="container d-flex justify-content-center">
+        <div class="col-6">
+            <h1>Register</h1>
+            {{ form_start(registrationForm) }}
+                <div class="row flex-wrap">
+                    <div class="form-row col-6">
+                        <p>{{ form_label(registrationForm.firstname) }}</p>
+                        {{ form_widget(registrationForm.firstname) }}
+                    </div>
+                    <div class="form-row col-6">
+                        <p>{{ form_label(registrationForm.lastname) }}</p>
+                        {{ form_widget(registrationForm.lastname) }}
+                    </div>
+                    <div class="form-row col-12">
+                        <p>{{ form_label(registrationForm.email) }}</p>
+                        {{ form_widget(registrationForm.email) }}
+                    </div>
+                    <div class="form-row col-4">
+                        <p>{{ form_label(registrationForm.age) }}</p>
+                        {{ form_widget(registrationForm.age) }}
+                    </div>
+                    <div class="form-row col-4">
+                        <p>{{ form_label(registrationForm.height) }}</p>
+                        {{ form_widget(registrationForm.height) }}
+                    </div>
+                    <div class="form-row col-4">
+                        <p>{{ form_label(registrationForm.weight) }}</p>
+                        {{ form_widget(registrationForm.weight) }}
+                    </div>
+                    <div class="form-row col-12">
+                        <p>{{ form_label(registrationForm.city) }}</p>
+                        {{ form_widget(registrationForm.city) }}
+                    </div>
+                    <div class="form-row col-12">
+                        <p>{{ form_label(registrationForm.plainPassword) }}</p>
+                        {{ form_widget(registrationForm.plainPassword) }}
+                    </div>
+                    <div class="form-row col-12">
+                        <p class="d-flex align-items-center">{{ form_widget(registrationForm.agreeTerms) }} Agree terms</p>
+                    </div>
+                    {{ form_row(registrationForm.latitude) }}
+                    {{ form_row(registrationForm.longitude) }}
+                </div>
+                <button type="submit" class="button w-100">Register</button>
+            {{ form_end(registrationForm) }}
+        </div>
+    </div>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.firstname) }}
-        {{ form_row(registrationForm.lastname) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.age) }}
-        {{ form_row(registrationForm.height) }}
-        {{ form_row(registrationForm.weight) }}
-        {{ form_row(registrationForm.latitude) }}
-        {{ form_row(registrationForm.longitude) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
 {% endblock %}
