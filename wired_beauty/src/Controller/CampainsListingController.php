@@ -49,6 +49,7 @@ class CampainsListingController extends AbstractController
     {
         $error = true;
         $checker = false;
+        $status = null;
         $campain = "";
         if (isset($_GET["campain_id"])) {
             $user = $this->security->getUser();
@@ -57,7 +58,10 @@ class CampainsListingController extends AbstractController
                 $error = false;
                 if ($user) {
                     foreach ($user->getCampainRegistrations() as $user_reg) {
-                        if ($user_reg->getCampain()->getId() == $_GET["campain_id"]) $checker = true;
+                        if ($user_reg->getCampain()->getId() == $_GET["campain_id"]) {
+                            $checker = true;
+                            $status = $user_reg->getStatus();
+                        }
                     }
                 }
             }
@@ -70,6 +74,7 @@ class CampainsListingController extends AbstractController
                 'controller_name'   => 'CampainsListingController',
                 "campain"           => $campain,
                 "already_asked"     => $checker,
+                "status"            => $status,
             ]);
         } else {
             return $this->redirectToRoute('campains_listing');
