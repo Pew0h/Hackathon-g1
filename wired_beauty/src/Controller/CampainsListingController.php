@@ -29,6 +29,18 @@ class CampainsListingController extends AbstractController
         return $this->render('campains_listing/index.html.twig', [
             'controller_name'   => 'CampainsListingController',
             "campains"          => $campains,
+            "menu"              => [
+                [
+                    "title" => "All campains",
+                    "class" => "active",
+                    "route" => "campains_listing"
+                ],
+                [
+                    "title" => "Subscribed campains",
+                    "class" => "",
+                    "route" => "campains_subscribed_listing"
+                ],
+            ]
         ]);
     }
 
@@ -37,6 +49,7 @@ class CampainsListingController extends AbstractController
     {
         $error = true;
         $checker = false;
+        $status = null;
         $campain = "";
         if (isset($_GET["campain_id"])) {
             $user = $this->security->getUser();
@@ -45,7 +58,10 @@ class CampainsListingController extends AbstractController
                 $error = false;
                 if ($user) {
                     foreach ($user->getCampainRegistrations() as $user_reg) {
-                        if ($user_reg->getCampain()->getId() == $_GET["campain_id"]) $checker = true;
+                        if ($user_reg->getCampain()->getId() == $_GET["campain_id"]) {
+                            $checker = true;
+                            $status = $user_reg->getStatus();
+                        }
                     }
                 }
             }
@@ -58,6 +74,7 @@ class CampainsListingController extends AbstractController
                 'controller_name'   => 'CampainsListingController',
                 "campain"           => $campain,
                 "already_asked"     => $checker,
+                "status"            => $status,
             ]);
         } else {
             return $this->redirectToRoute('campains_listing');
@@ -67,9 +84,29 @@ class CampainsListingController extends AbstractController
     #[Route('/campains/Subscribed', name: 'campains_subscribed_listing')]
     public function listSubscribedCampains(): Response
     {
+        $user = $this->security->getUser();
+        $campains = [];
+        foreach ($user->getCampainRegistrations() as $user_reg) {
+            $date = $user_reg->getcampain()->getStartDate()->format("d-m-Y");
+            $campains[$date . "_" . $user_reg->getCampain()->getId()] = $user_reg->getCampain();
+        }
+        ksort($campains);
 
         return $this->render('campains_listing/index.html.twig', [
-            'controller_name' => 'CampainsListingController',
+            'controller_name'   => 'CampainsListingController',
+            "campains"          => $campains,
+            "menu"              => [
+                [
+                    "title" => "All campains",
+                    "class" => "",
+                    "route" => "campains_listing"
+                ],
+                [
+                    "title" => "Subscribed campains",
+                    "class" => "active",
+                    "route" => "campains_subscribed_listing"
+                ],
+            ]
         ]);
     }
 

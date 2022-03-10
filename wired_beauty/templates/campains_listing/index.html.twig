@@ -16,27 +16,69 @@
 {% block body %}
 	<div class="container campains-listing">
 		<div class="row">
-			{% for campain in campains %}
-				<div class="col-4">
-					<div class="card">
-						<div class="card-header">
-							{% if (campain.company) != "" %}
-								{% if campain.company.image %}
-									<img src="{{ asset("/uploads/" ~ campain.company.image) }}" alt="">
-								{% endif %}
+			<div class="col-2 menu">
+				<ul>
+					{% for item in menu %}
+						<li class='{{ item.class }}'>
+							<a href="{{ url(item.route) }}">{{ item.title }}</a>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+			<div class="col-10">
+				<div class="row">
+					{% for campain in campains %}
+
+						{% set checker = false %}
+						{% set campainReg = "" %}
+
+						{% for user_reg in app.user.campainRegistrations %}
+							{% if user_reg.campain.id == campain.id %}
+								{% set checker = true %}
+								{% set campainReg = user_reg %}
 							{% endif %}
-							<h3>{{ campain.name }}</h3>
-							<small>{{ campain.startDate|date("d-m-Y") }}
-								-
-								{{ campain.endDate|date("d-m-Y") }}</small>
+						{% endfor %}
+
+						<div class="col-4">
+							<div class="card">
+								<div class="card-header">
+									<div class="company-img">
+										{% if (campain.company) != "" %}
+											{% if campain.company.image %}
+												<img src="{{ asset("/uploads/" ~ campain.company.image) }}" alt="">
+											{% endif %}
+										{% endif %}
+									</div>
+									<h3>{{ campain.name }}</h3>
+									<small>{{ campain.startDate|date("d-m-Y") }}
+										-
+										{{ campain.endDate|date("d-m-Y") }}</small>
+								</div>
+								<div class="card-body">
+									{% if (campain.description) %}
+										{{ campain.description|striptags|slice(0, 50) ~ '...' }}
+									{% endif %}
+									{% if checker == true %}
+										{% if campainReg.status == 0 %}
+											<span class='status pending'>Pending</span>
+										{% elseif campainReg.status == 1 %}
+											<span class='status accepted'>Accepted</span>
+										{% elseif campainReg.status == 2 %}
+											<span class='status completed'>Completed</span>
+										{% elseif campainReg.status == 3 %}
+											<span class='status refused'>Refused</span>
+										{% endif %}
+
+										<a class='white button' href="{{ url("campains_single") }}?campain_id={{ campain.id }}">See details</a>
+									{% else %}
+										<a class='register button' href="{{ url("campains_single") }}?campain_id={{ campain.id }}">Ask to be a tester</a>
+									{% endif %}
+								</div>
+							</div>
 						</div>
-						<div class="card-body">
-							{{ campain.description|raw }}
-							<a class='register button' href="{{ url("campains_single") }}?campain_id={{ campain.id }}">Ask to be a tester</a>
-						</div>
-					</div>
+					{% endfor %}
 				</div>
-			{% endfor %}
+			</div>
 		</div>
 	</div>
 {% endblock %}

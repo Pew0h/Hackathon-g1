@@ -36,9 +36,11 @@
 				{% if campain.product %}
 					<div class="col-6 product">
 						<div class="product-header">
-							{% if campain.product.image %}
-								<img src="{{ asset("/uploads/" ~ campain.product.image) }}" alt="">
-							{% endif %}
+							<div class="product-img">
+								{% if campain.product.image %}
+									<img src="{{ asset("/uploads/" ~ campain.product.image) }}" alt="">
+								{% endif %}
+							</div>
 							<h4>{{ campain.product.name }}</h4>
 						</div>
 						<div class="description">
@@ -49,9 +51,11 @@
 				{% if campain.company %}
 					<div class="col-6 company">
 						<div class="company-header text-center">
-							{% if campain.company.image %}
-								<img src="{{ asset("/uploads/" ~ campain.company.image) }}" alt="">
-							{% endif %}
+							<div class="company-img">
+								{% if campain.company.image %}
+									<img src="{{ asset("/uploads/" ~ campain.company.image) }}" alt="">
+								{% endif %}
+							</div>
 							<h4>{{ campain.company.name }}</h4>
 						</div>
 						<div class="description">
