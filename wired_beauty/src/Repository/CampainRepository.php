@@ -45,6 +45,31 @@ class CampainRepository extends ServiceEntityRepository
         }
     }
 
+    public function getByDate(\Datetime $date)
+    {
+        $from = new \DateTime($date->format("Y-m-d") . " 00:00:00");
+
+        $qb = $this->createQueryBuilder("e");
+        $qb
+            ->andWhere('e.startDate >= :from')
+            ->orderBy("e.startDate")
+            ->setParameter('from', $from);
+        $result = $qb->getQuery()->getResult();
+
+        return $result;
+    }
+
+    public function findById($id)
+    {
+        $qb = $this->createQueryBuilder("e");
+        $qb
+            ->andWhere('e.id = :id')
+            ->setParameter('id', $id);
+        $result = $qb->getQuery()->getResult();
+
+        return $result;
+    }
+
     // /**
     //  * @return Campain[] Returns an array of Campain objects
     //  */

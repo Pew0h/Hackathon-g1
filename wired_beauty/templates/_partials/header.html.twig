@@ -1,24 +1,49 @@
 <header>
-    <div class="container">
-        <nav>
-            <a id="logo" href="{{ path('index') }}"> <img src="{{ asset('/images/logo.svg') }}" alt="logo"></a>
-            <ul>
-                <li><a href="#">Order a report</a></li>
-                {% if app.user %}
-                    <li><a href="{{ path('edit_profile') }}">Profile</a></li>
-                    <li><a href="{{ path('app_logout') }}">Logout</a></li>
-                {% else %}
-                    <li><a href="{{ path('app_register') }}">Become a panelist</a></li>
-                    <li><a class="button" href="{{ path('login') }}">Login</a></li>
-                {% endif %}
+	<div class="container">
+		<nav>
+			<a id="logo" href="{{ path('index') }}">
+				<img src="{{ asset('/images/logo.svg') }}" alt="logo"></a>
+			<ul>
+				<li>
+					<a href="#">Order a report</a>
+				</li>
+				{% if app.user %}
+					<li>
+						<a href="{{ path('campains_listing') }}">Register to a campain</a>
+					</li>
+					<li>
+						<a href="{{ path('edit_profile') }}">Profile</a>
+					</li>
+					<li>
+						<a href="{{ path('app_logout') }}">Logout</a>
+					</li>
+				{% else %}
+					<li>
+						<a href="{{ path('app_register') }}">Become a panelist</a>
+					</li>
+					<li>
+						<a class="button" href="{{ path('login') }}">Login</a>
+					</li>
+				{% endif %}
 
-                <li>
-                    <div class="icon nav-icon-5">
-                        <span></span>
-                        <span></span>
-                    </div>
-                </li>
-            </ul>
-        </nav>
-    </div>
+				<li>
+					<div id="toggle-menu" class="icon nav-icon-5">
+						<span></span>
+						<span></span>
+					</div>
+				</li>
+			</ul>
+		</nav>
+		<div id="nav-secondary">
+			<div>
+				<ul>
+					<li><a href="#0">What we do</a></li>
+					<li><a href="#0">Labgrade devices</a></li>
+					<li><a href="#0">Who we are</a></li>
+					<li><a href="#0">Scientific validation</a></li>
+					<li><a href="#0">Studies & Services</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
 </header>

@@ -31,6 +31,53 @@ header {
   .button {
     color: var(--color-white);
   }
+
+  #nav-secondary {
+    position: absolute;
+    top: 10rem;
+    right: 0;
+    width: 0;
+    height: calc(100vh - 10rem);
+    overflow: hidden;
+    transition: width .4s ease;
+
+    &.active {
+      width: 40rem;
+    }
+
+    & > div {
+      position: relative;
+      height: 100%;
+
+      ul {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 40rem;
+        height: 100%;
+        margin: 0;
+        padding: 4rem;
+        background-color: var(--color-primary);
+        z-index: 10000;
+
+        li {
+          margin-bottom: 1rem;
+
+          a {
+            display: block;
+            font-size: 2.6rem;
+            color: var(--color-white);
+            transform: translateX(0);
+            transition: transform .3s;
+
+            &:hover {
+              transform: translateX(.5rem);
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 /* nav-icon-5 */
@@ -46,7 +93,7 @@ header {
   background-color:#000000;
   position: absolute;
   border-radius: 2px;
-  transition: .3s cubic-bezier(.8, .5, .2, 1.4);
+  transition: .3s ease;
   width:100%;
   height: 1px;
   transition-duration: 500ms;
@@ -63,10 +110,10 @@ header {
 }
 
 .nav-icon-5:not(.open):hover span:nth-child(1){
-  transform: rotate(-3deg) scaleY(1.1);
+  transform: rotate(3deg) scaleY(1.1);
 }
 .nav-icon-5:not(.open):hover span:nth-child(2){
-  transform: rotate(3deg) scaleY(1.1);
+  transform: rotate(-3deg) scaleY(1.1);
 }
 .nav-icon-5.open span:nth-child(1){
   width: 30px;
