@@ -3,16 +3,23 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+
+    const ROLE_USER = "ROLE_USER";
+    const ROLE_ADMIN = "ROLE_ADMIN";
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
@@ -33,6 +40,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string')]
     private $lastname;
     
+    #[Assert\GreaterThan(value: 17)]
     #[ORM\Column(type: 'integer')]
     private $age;
     
@@ -42,11 +50,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'integer')]
     private $weight;
     
+    #[Assert\NotBlank]
     #[ORM\Column(type: 'float')]
     private $latitude;
     
     #[ORM\Column(type: 'float')]
     private $longitude;
+
+    #[ORM\OneToMany(mappedBy: 'tester', targetEntity: CampainRegistration::class, orphanRemoval: true)]
+    private $campainRegistrations;
+
+    public function __construct()
+    {
+        $this->campainRegistrations = new ArrayCollection();
+    }
+
+    public function __toString() {
+        return "#".$this->getId() . " " . $this->firstname . " " . $this->lastname;
+    }
 
     public function getId(): ?int
     {
@@ -94,6 +115,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function checkRole($user, $role) {
+        $has_role = false;
+        if ($user) {
+            if (in_array($role, $user->getRoles())) {
+                $has_role = true;
+            }
+        }
+        return $has_role;
+    }
+
     /**
      * @see PasswordAuthenticatedUserInterface
      */
@@ -107,6 +138,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->password = $password;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlainPassword(): string
+    {
+        return $this->plainPassword ?? '' ;
     }
 
     /**
@@ -156,6 +195,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->lastname = $lastname;
 
         return $this;
+    }
+
+    public function getFullname() {
+        return $this->firstname . " " . $this->lastname;
     }
 
     /**
@@ -254,6 +297,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLongitude($longitude)
     {
         $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CampainRegistration>
+     */
+    public function getCampainRegistrations(): Collection
+    {
+        return $this->campainRegistrations;
+    }
+
+    public function addCampainRegistration(CampainRegistration $campainRegistration): self
+    {
+        if (!$this->campainRegistrations->contains($campainRegistration)) {
+            $this->campainRegistrations[] = $campainRegistration;
+            $campainRegistration->setTester($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCampainRegistration(CampainRegistration $campainRegistration): self
+    {
+        if ($this->campainRegistrations->removeElement($campainRegistration)) {
+            // set the owning side to null (unless already changed)
+            if ($campainRegistration->getTester() === $this) {
+                $campainRegistration->setTester(null);
+            }
+        }
 
         return $this;
     }

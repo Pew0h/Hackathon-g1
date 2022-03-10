@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Home {% endblock %}
+
+{# STYLES #}
+{% block styles %}
+   {{ encore_entry_link_tags('home') }}
+{% endblock %}
+
+{# SCRIPTRS #}
+{# {% block scripts %}{% endblock %} #}
+
+{% block body %}
+
+  <section class="Hero container d-flex align-items-center">
+  <div class="row w-100">
+      <div class="Hero__container-text offset-1 col-6">
+        <h1 class="Hero__container-text__title"><span>New, different, better</span><br>ways to research skincare</h1>
+        <p class ="Hero__container-text__text">
+          Hybrid clinical trials and consumer studies</br>
+          Pioneering data-driven skincare research</br>
+          Digitally enabled Lab & Cconsumer skincare testing</p>
+        <button class="button" type="submit">Book a demo</button>
+      </div>
+      <div class="Hero__container-image col-6">
+            <img class="Hero__container-image__image" src="{{ asset('/images/classe.jpeg') }}" alt="dame classieuse">
+      </div>
+  </div>        
+  </section>
+
+{% endblock %}

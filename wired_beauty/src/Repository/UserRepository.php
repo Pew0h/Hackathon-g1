@@ -6,6 +6,7 @@ use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -46,6 +47,20 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         if ($flush) {
             $this->_em->flush();
         }
+    }
+
+    /**
+     * @param User $user
+     * @return User[]
+     */
+    public function queryAll(User $user)
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u != :user')
+            ->setParameter('user', $user)
+            ->orderBy('u.lastname', 'ASC')
+            ->getQuery()
+            ->getResult();
     }
 
     /**

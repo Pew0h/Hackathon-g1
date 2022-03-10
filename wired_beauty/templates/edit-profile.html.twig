@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit profile{% endblock %}
+
+{# STYLES #}
+{% block styles %}
+   {{ encore_entry_link_tags('edit-profile') }}
+{% endblock %}
+
+{# SCRIPTS #}
+{% block scripts %}
+   {{ encore_entry_script_tags('edit-profile') }}
+{% endblock %}
+
+{% block body %}
+    <div class="container d-flex justify-content-center">
+        <div class="col-6">
+            <h1>Edit profile</h1>
+            {{ form_start(form) }}
+                <div class="row flex-wrap">
+                    <div class="form-row col-6">
+                        <p>{{ form_label(form.firstname) }}</p>
+                        {{ form_widget(form.firstname) }}
+                        <div class="error">{{ form_errors(form.firstname) }}</div>
+                    </div>
+                    <div class="form-row col-6">
+                        <p>{{ form_label(form.lastname) }}</p>
+                        {{ form_widget(form.lastname) }}
+                        <div class="error">{{ form_errors(form.lastname) }}</div>
+                    </div>
+                    <div class="form-row col-4">
+                        <p>{{ form_label(form.age) }}</p>
+                        {{ form_widget(form.age) }}
+                        <div class="error">{{ form_errors(form.age) }}</div>
+                    </div>
+                    <div class="form-row col-4">
+                        <p>{{ form_label(form.height) }}</p>
+                        {{ form_widget(form.height) }}
+                        <div class="error">{{ form_errors(form.height) }}</div>
+                    </div>
+                    <div class="form-row col-4">
+                        <p>{{ form_label(form.weight) }}</p>
+                        {{ form_widget(form.weight) }}
+                        <div class="error">{{ form_errors(form.weight) }}</div>
+                    </div>
+                    <div class="search-city form-row col-12 display-results">
+                        <p>{{ form_label(form.city) }}</p>
+                        <span class="search-city__container-input">{{ form_widget(form.city) }}</span>
+                        <div class="d-flex justify-content-end">
+                            <span class="search-city__remove text-small">Remove</span>
+                        </div>
+                        <div class="error">{{ form_errors(form.latitude) }}</div>
+                        <div class="search-city__container-results"></div>
+                    </div>
+                    <div class="d-none">
+                        {{ form_row(form.latitude) }}
+                        {{ form_row(form.longitude) }}
+                    </div>
+                </div>
+                <button type="submit" class="button w-100">Save</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+{% endblock %}

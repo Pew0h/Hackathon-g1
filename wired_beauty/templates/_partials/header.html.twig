@@ -1,0 +1,24 @@
+<header>
+    <div class="container">
+        <nav>
+            <a id="logo" href="{{ path('index') }}"> <img src="{{ asset('/images/logo.svg') }}" alt="logo"></a>
+            <ul>
+                <li><a href="#">Order a report</a></li>
+                <li><a href="{{ path('app_register') }}">Become a panelist</a></li>
+                {% if app.user %}
+                    <li><a href="{{ path('edit_profile') }}">Profile</a></li>
+                    <li><a href="{{ path('app_logout') }}">Logout</a></li>
+                {% else %}
+                    <li><a class="button" href="{{ path('login') }}">Login</a></li>
+                {% endif %}
+
+                <li>
+                    <div class="icon nav-icon-5">
+                        <span></span>
+                        <span></span>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>

@@ -1,0 +1,138 @@
+@import "~bootstrap/scss/bootstrap-grid.scss";
+@import url("https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500;700&display=swap");
+
+:root {
+  --color-primary: #a42c23;
+  --color-secondary: #db6a39;
+  --color-black: #262626;
+  --color-gray: #a5a5a5;
+  --color-white: #fafafa;
+  --color-green: #3dd643;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: "Reem Kufi", sans-serif;
+  color: var(--color-black);
+}
+html * {
+  font-family: "Reem Kufi", sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+a,
+a:hover,
+a:visited,
+a:active {
+  text-decoration: none;
+  color: var(--color-primary);
+}
+
+h1 {
+  font-size: 6rem;
+  line-height: 7rem;
+  font-weight: bold;
+}
+h2 {
+  font-size: 4rem;
+  line-height: 6rem;
+  font-weight: bold;
+}
+h3 {
+  font-size: 2.8rem;
+  line-height: 4.2rem;
+  font-weight: bold;
+}
+
+ul {
+  list-style: none;
+  padding-inline-start: 0%;
+}
+
+input,
+input:focus {
+  padding: 1rem 3rem;
+  font-family: "Reem Kufi", sans-serif;
+  font-size: 1.6rem;
+  border: 1px solid var(--color-black);
+  border-radius: 5rem;
+}
+
+input:not([type="checkbox"]) {
+  width: 100%;
+}
+
+input[type="checkbox"] {
+  margin-right: 20px;
+}
+
+input::placeholder {
+  color: var(--color-black);
+  opacity: 0.5;
+}
+
+a.button,
+input.button,
+.button {
+  height: 4.6rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 3rem;
+  color: var(--color-white);
+  background-color: var(--color-primary);
+  text-align: center;
+  text-decoration: none;
+  font-size: 1.6rem;
+  border-radius: 23px;
+  border: .1rem solid var(--color-white);
+  cursor: pointer;
+  transition: all .2s;
+
+  &:hover {
+    --new-width: .2rem;
+    padding: calc(1rem - var(--new-width)) calc(3rem - var(--new-width));
+    border-width: calc(.1rem + var(--new-width));
+  }
+}
+
+.form-row {
+    margin-bottom: 2rem;
+
+  p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.text-small {
+    font-size: 1.6rem;
+}
+
+div.error {
+    margin: 0 0 1rem;
+    
+    &,
+    * {
+        color: var(--color-secondary);
+        font-size: 1.6rem;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+
+        li {
+            margin: 0 0 1rem;
+        }
+    }
+}

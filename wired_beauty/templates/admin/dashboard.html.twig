@@ -4,6 +4,54 @@
 {% block body_class 'page-content page-content-with-padding page-dashboard' %}
 
 {% block page_content %}
-    <h2>Titre</h2>
-    <p>Voici un Contenu</p>
+	<div class="dashboard-home">
+		<h2>Created entities</h2>
+		<div class="row">
+			{% for key, entity in entities %}
+				<div class="col-4 {{ key }}">
+					<div class="card user d-flex">
+						<div class="count">
+							<h2>{{ entity|length }}</h2>
+						</div>
+						<div class="text">
+							<h4>Created
+								{{ key }}</h4>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+		<h2>Campains</h2>
+		<div class="row">
+			{% for key, entity in campains %}
+				<div class="col-4 {{ key }}">
+					<div class="card user d-flex">
+						<div class="count">
+							<h2>{{ entity|length }}</h2>
+						</div>
+						<div class="text">
+							<h4>Created
+								{{ key|replace({ "_": " " }) }}</h4>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+		<h2>Questions</h2>
+		<div class="row">
+			{% for key, entity in questions %}
+				<div class="col-4 {{ key }}">
+					<div class="card user d-flex">
+						<div class="count">
+							<h2>{{ entity|length }}</h2>
+						</div>
+						<div class="text">
+							<h4>Created
+								{{ key|replace({ "_": " " }) }}</h4>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
 {% endblock %}

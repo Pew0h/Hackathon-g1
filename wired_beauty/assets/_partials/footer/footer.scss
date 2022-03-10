@@ -1,0 +1,25 @@
+/* Footer Class CSS */
+
+footer {
+  margin-top: 50px;
+  margin-left: O;
+}
+
+footer ul {
+  display: flex;
+  flex-direction: row;
+  margin-top: 2rem;
+}
+
+footer h3 {
+  margin-top: 0;
+}
+
+footer a {
+  color: var(--color-black) !important;
+}
+
+hr {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
