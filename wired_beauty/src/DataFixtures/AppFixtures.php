@@ -199,7 +199,7 @@ class AppFixtures extends Fixture
             '9' => [
                 'name'          => 'Crème SOS hydratation intense vinosource-hydra',
                 'description'   => "As soft as it is natural, this unctuous cream soothes even the most sensitive dry skin, leaving it supple and moisturized. Redness and tightness give way to a sensation of immediate comfort. Ultra-sensory, it acts like a thirst-quenching wave on a daily basis for a revitalized and plumped skin, or as an S.O.S. gesture to repair the damage caused by external aggressions. Its phyto-aromatic fragrance is fresh and subtle, combining green notes of bergamot, mandarin, lemon leaf, cucumber and fresh mint.",
-                'image'         => 'Produit_00.png',
+                'image'         => 'Produit_09.png',
                 'uv_protection' => '0',
                 'company'       => $companies['caudalie'],
             ]
