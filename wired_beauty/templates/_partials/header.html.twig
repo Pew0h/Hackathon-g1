@@ -7,6 +7,7 @@
 				<li>
 					<a href="#">Order a report</a>
 				</li>
+
 				{% if app.user %}
 					<li>
 						<a href="{{ path('campains_listing') }}">Register to a campain</a>
@@ -14,6 +15,13 @@
 					<li>
 						<a href="{{ path('edit_profile') }}">Profile</a>
 					</li>
+					{% for role in app.user.roles %}
+						{% if role == 'ROLE_ADMIN' %}
+							<li>
+								<a href="{{ path('admin') }}">Admin</a>
+							</li>
+						{% endif %}
+					{% endfor %}
 					<li>
 						<a href="{{ path('app_logout') }}">Logout</a>
 					</li>

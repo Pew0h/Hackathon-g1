@@ -16,6 +16,9 @@
 {% block body %}
 	<div class="campain container">
 		<div class="row">
+			<div class="col-12 mb-5">
+				<a href="{{ url("campains_listing") }}" class='back'>&#60; Back to campains</a>
+			</div>
 			<div class="col-3">
 				<div class="campain__company-container">
 					{% if campain.company.image %}

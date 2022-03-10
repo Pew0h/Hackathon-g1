@@ -5,8 +5,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function setActions(actions, type) {
-  actions.forEach((action) => {
-    if (type == "edit") {
+
+    actions.forEach((action) => {
+        if (type == "edit") {
       let href = action
         .closest("tr")
         .querySelector(".actions .action-edit").href;
