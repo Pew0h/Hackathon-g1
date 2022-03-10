@@ -49,86 +49,82 @@ class CampainsListingController extends AbstractController
         ]);
     }
 
-    #[Route('/campains/single', name: 'campains_single')]
-    public function campainDetails(Request $request, EntityManagerInterface $entityManager): ?Response
+    #[Route('/campains/single/{campain}', name: 'campains_single')]
+    public function campainDetails(Request $request, EntityManagerInterface $entityManager, Campain $campain): ?Response
     {
         $error = true;
         $checker = false;
         $status = null;
-        $campain = "";
         $campainRegistration = null;
         $form = null;
         $formLength = null;
         $questions = [];
+        $user = $this->security->getUser();
 
-        if (isset($_GET["campain_id"])) {
-            $user = $this->security->getUser();
-            $campain = $this->em->getRepository(Campain::class)->find($_GET["campain_id"]);
+        if ($campain) {
+            $error = false;
 
-            if ($campain) {
-                $error = false;
-
-                if ($user) {
-                    foreach ($user->getCampainRegistrations() as $user_reg) {
-                        if ($user_reg->getCampain()->getId() == $_GET["campain_id"]) {
-                            $checker = true;
-                            $campainRegistration = $user_reg;
-                            $status = $user_reg->getStatus();
-                        }
-                    }
-                }
-
-                if ($status && $status == 1) {
-                    if ($campain->getQcm()) {
-                        $userQcmResponse = new UserQcmResponse();
-                        $form = $this->createFormBuilder($userQcmResponse);
-
-                        $questions = $campain->getQcm()->getQuestions();
-                        $formLength = count($questions);
-
-                        foreach ($questions as $k => $question) {
-                            $choices = [];
-
-                            foreach ($question->getChoices() as $choice) {
-                                $choices[$choice->getValue()] = $choice->getValue();
-                            }
-
-                            $form->add( 'question_' . $k + 1, ChoiceType::class, [
-                                'mapped' => false,
-                                'label' => $question->getName(),
-                                'choices' => $choices
-                            ]);
-                        }
-
-                        $form = $form->getForm();
-                        $form->handleRequest($request);
-
-                        if ($form->isSubmitted()) {
-                            $userQcmResponse->setCampainRegistration($campainRegistration);
-                            $data = [];
-
-                            for ($i = 1; $i < $formLength; $i++) {
-                                $data['question_' . $i] = [
-                                    'name' => $questions[$i - 1]->getName(),
-                                    'value' => $form->get('question_' . $i)->getData()
-                                ];
-                            }
-
-                            $userQcmResponse->setContent($data);
-                            $campainRegistration->setStatus(2);
-                            $entityManager->persist($userQcmResponse);
-                            $entityManager->persist($campainRegistration);
-                            $entityManager->flush();
-                            $status = 2;
-                        }
+            if ($user) {
+                foreach ($user->getCampainRegistrations() as $user_reg) {
+                    if ($user_reg->getCampain()->getId() == $campain->getId()) {
+                        $checker = true;
+                        $campainRegistration = $user_reg;
+                        $status = $user_reg->getStatus();
                     }
                 }
             }
 
-            if (isset($_GET["register"]) && $_GET["register"] == "true") {
-                $this->registerToCampain($_GET["campain_id"]);
+            if ($status && $status == 1) {
+                if ($campain->getQcm()) {
+                    $userQcmResponse = new UserQcmResponse();
+                    $form = $this->createFormBuilder($userQcmResponse);
+
+                    $questions = $campain->getQcm()->getQuestions();
+                    $formLength = count($questions);
+
+                    foreach ($questions as $k => $question) {
+                        $choices = [];
+
+                        foreach ($question->getChoices() as $choice) {
+                            $choices[$choice->getValue()] = $choice->getValue();
+                        }
+
+                        $form->add( 'question_' . $k + 1, ChoiceType::class, [
+                            'mapped' => false,
+                            'label' => $question->getName(),
+                            'choices' => $choices
+                        ]);
+                    }
+
+                    $form = $form->getForm();
+                    $form->handleRequest($request);
+
+                    if ($form->isSubmitted()) {
+                        $userQcmResponse->setCampainRegistration($campainRegistration);
+                        $data = [];
+
+                        for ($i = 1; $i < $formLength; $i++) {
+                            $data['question_' . $i] = [
+                                'name' => $questions[$i - 1]->getName(),
+                                'value' => $form->get('question_' . $i)->getData()
+                            ];
+                        }
+
+                        $userQcmResponse->setContent($data);
+                        $campainRegistration->setStatus(2);
+                        $entityManager->persist($userQcmResponse);
+                        $entityManager->persist($campainRegistration);
+                        $entityManager->flush();
+                        $status = 2;
+                    }
+                }
             }
         }
+
+        if (isset($_GET["register"]) && $_GET["register"] == "true") {
+            $this->registerToCampain($campain->getId());
+        }
+       
         if ($error === false) {
 
             return $this->render('campains_listing/single.html.twig', [
