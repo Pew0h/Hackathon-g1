@@ -14,56 +14,61 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container campains-single">
-		<a href="{{ url("campains_listing") }}" class='back'>
-			&#60; Back to campains</a>
+	<div class="campain container">
 		<div class="row">
-			<div class="campain">
-				<div class="title">
-					<h2>{{ campain.name }}</h2>
-					{% if already_asked %}
-						<button class='button white'>You already asked for that campain</button>
+			<div class="col-12 mb-5">
+				<a href="{{ url("campains_listing") }}" class='back'>&#60; Back to campains</a>
+			</div>
+			<div class="col-3">
+				<div class="campain__company-container">
+					{% if campain.company.image %}
+						<img class="campain__company-container__image" src="{{ asset("/uploads/" ~ campain.company.image) }}" alt="">
 					{% else %}
-						<a href="?campain_id={{ campain.id }}&register=true" class='button register'>Ask to be a tester</a>
+						<h3 class="campain__company-container__title">{{ campain.company.name }}</h3>
 					{% endif %}
-				</div>
-				<small class='dates'>{{ campain.startDate|date("F j, Y") }}
-					-
-					{{ campain.endDate|date("F j, Y") }}</small>
-				<div class="description">
-					{{ campain.description|raw }}
+					<p class="campain__company-container__content">{{ campain.company.description|raw }}</p>
 				</div>
 			</div>
-			<div class="row product-company">
-				{% if campain.product %}
-					<div class="col-6 product">
-						<div class="product-header">
-							<div class="product-img">
-								{% if campain.product.image %}
-									<img src="{{ asset("/uploads/" ~ campain.product.image) }}" alt="">
-								{% endif %}
-							</div>
-							<h4>{{ campain.product.name }}</h4>
-						</div>
-						<div class="description">
-							{{ campain.product.description|raw }}
-						</div>
-					</div>
+			<div class="col-8 offset-1">
+				<h2 class="campain__title">{{ campain.name }}</h2>
+				<div class='campain__date text-small'>{{ campain.startDate|date("d/m/Y") }} - {{ campain.endDate|date("d/m/Y") }}</div>
+
+				{% set s = status / 1 %}
+				
+				{% if s is same as(0) %}
+					<button class='button white'>Pending</button>
+				{% elseif s is same as(1) %}
+					<button class='button white'>Accepted</button>
+				{% elseif s is same as(2) %}
+					<button class='button white'>Completed</button>
+				{% elseif s is same as(3) %}
+					<button class='button white'>Refused</button>
+				{% else %}
+					<a href="?campain_id={{ campain.id }}&register=true" class='button register'>Ask to be a tester</a>
 				{% endif %}
-				{% if campain.company %}
-					<div class="col-6 company">
-						<div class="company-header text-center">
-							<div class="company-img">
-								{% if campain.company.image %}
-									<img src="{{ asset("/uploads/" ~ campain.company.image) }}" alt="">
-								{% endif %}
+				
+				<h3>Description</h3>
+				<p class="campain__description">{{ campain.description|raw }}</p>
+
+				<div class="campain__product-container">
+					<h3 class="campain__company-container__title">{{ campain.product.name }}</h3>
+					{% if campain.product.image %}
+						<img class="campain__company-container__image" src="{{ asset("/uploads/" ~ campain.product.image) }}" alt="">
+					{% endif %}
+					<p class="campain__product-container__content">{{ campain.product.description|raw }}</p>
+				</div>
+
+				{% if s is same as(1) and campain.qcm %}
+					<h3>QCM</h3>
+					{{ form_start(form) }}
+						{% for index in 1..formLength %}
+							<div class="form-row">
+								<p>{{ form_label(form['question_' ~ index]) }}</p>
+								{{ form_widget(form['question_' ~ index]) }}
 							</div>
-							<h4>{{ campain.company.name }}</h4>
-						</div>
-						<div class="description">
-							{{ campain.company.description|raw }}
-						</div>
-					</div>
+						{% endfor %}
+						<button type="submit" class="button mt-5 w-100">Register</button>
+					{{ form_end(form) }}
 				{% endif %}
 			</div>
 		</div>
