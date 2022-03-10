@@ -12,6 +12,11 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Filter\ArrayFilter;
+use EasyCorp\Bundle\EasyAdminBundle\Filter\ChoiceFilter;
+use EasyCorp\Bundle\EasyAdminBundle\Filter\TextFilter;
 
 class CampainRegistrationCrudController extends AbstractBaseCrudController
 {
@@ -24,6 +29,16 @@ class CampainRegistrationCrudController extends AbstractBaseCrudController
     public static function getEntityFqcn(): string
     {
         return CampainRegistration::class;
+    }
+
+    public function configureFilters(Filters $filters): Filters
+    {
+        return $filters
+            ->add(ChoiceFilter::new('status')->setChoices([
+                "Pending" => CampainRegistration::STATUS_PENDING,
+                "Accepted" => CampainRegistration::STATUS_ACCEPTED,
+                "Refused" => CampainRegistration::STATUS_REFUSED,
+            ]));
     }
 
     public function configureFields(string $pageName): iterable
