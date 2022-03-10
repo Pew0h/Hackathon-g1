@@ -14,6 +14,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
+use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\BatchActionDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\ArrayFilter;
@@ -64,52 +65,101 @@ class CampainRegistrationCrudController extends AbstractBaseCrudController
 
     public function configureActions(Actions $actions): Actions
     {
-        $setPendingStatus = Action::new('setPendingStatus', 'Set pending status')
+        $setPendingStatus = Action::new('setPendingStatus', 'Set status to "Pending"')
             ->linkToCrudAction('setPendingStatus')
             ->createAsGlobalAction()
             ->addCssClass('btn');
-        $setAcceptedStatus = Action::new('setAcceptedStatus', 'Set accepted status')
+        $setPendingStatusSingle = Action::new('setPendingStatusSingle', 'Set status to "Pending"')
+            ->linkToCrudAction('setPendingStatusSingle');
+
+        $setAcceptedStatus = Action::new('setAcceptedStatus', 'Set status to "Accepted"')
             ->linkToCrudAction('setAcceptedStatus')
             ->createAsGlobalAction()
             ->addCssClass('btn');
-        $setConfirmedStatus = Action::new('setConfirmedStatus', 'Set confirmed status')
+        $setAcceptedStatusSingle = Action::new('setAcceptedStatusSingle', 'Set status to "Accepted"')
+            ->linkToCrudAction('setAcceptedStatusSingle');
+
+        $setConfirmedStatus = Action::new('setConfirmedStatus', 'Set status to "Confirmed"')
             ->linkToCrudAction('setConfirmedStatus')
             ->createAsGlobalAction()
             ->addCssClass('btn');
-        $setRejectedStatus = Action::new('setRejectedStatus', 'Set rejected status')
+        $setConfirmedStatusSingle = Action::new('setConfirmedStatusSingle', 'Set status to "Confirmed"')
+            ->linkToCrudAction('setConfirmedStatusSingle');
+
+        $setRejectedStatus = Action::new('setRejectedStatus', 'Set status to "Rejected"')
             ->linkToCrudAction('setRejectedStatus')
             ->createAsGlobalAction()
             ->addCssClass('btn');
+        $setRejectedStatusSingle = Action::new('setRejectedStatusSingle', 'Set status to "Rejected"')
+            ->linkToCrudAction('setRejectedStatusSingle');
+
+
 
         return $actions
-            ->addBatchAction($setPendingStatus)
-            ->addBatchAction($setAcceptedStatus)
+            ->add(Crud::PAGE_INDEX, $setRejectedStatusSingle)
+            ->add(Crud::PAGE_INDEX, $setConfirmedStatusSingle)
+            ->add(Crud::PAGE_INDEX, $setAcceptedStatusSingle)
+            ->add(Crud::PAGE_INDEX, $setPendingStatusSingle)
             ->addBatchAction($setRejectedStatus)
-            ->addBatchAction($setConfirmedStatus);
+            ->addBatchAction($setConfirmedStatus)
+            ->addBatchAction($setAcceptedStatus)
+            ->addBatchAction($setPendingStatus);
     }
 
     public function setPendingStatus(BatchActionDto $batchActionDto): RedirectResponse
     {
-        $this->setStatus($batchActionDto, 0);
+        $this->setStatus($batchActionDto, CampainRegistration::STATUS_PENDING);
         return $this->redirect($batchActionDto->getReferrerUrl());
+    }
+
+    public function setPendingStatusSingle(AdminContext $context)
+    {
+        $campain = $context->getEntity()->getInstance()->setStatus(CampainRegistration::STATUS_PENDING);
+        $this->em->persist($campain);
+        $this->em->flush();
+        return $this->redirect($context->getReferrer());
     }
 
     public function setAcceptedStatus(BatchActionDto $batchActionDto): RedirectResponse
     {
-        $this->setStatus($batchActionDto, 1);
+        $this->setStatus($batchActionDto, CampainRegistration::STATUS_ACCEPTED);
         return $this->redirect($batchActionDto->getReferrerUrl());
+    }
+
+    public function setAcceptedStatusSingle(AdminContext $context)
+    {
+        $campain = $context->getEntity()->getInstance()->setStatus(CampainRegistration::STATUS_ACCEPTED);
+        $this->em->persist($campain);
+        $this->em->flush();
+        return $this->redirect($context->getReferrer());
     }
 
     public function setConfirmedStatus(BatchActionDto $batchActionDto): RedirectResponse
     {
-        $this->setStatus($batchActionDto, 2);
+        $this->setStatus($batchActionDto, CampainRegistration::STATUS_COMPLETED);
         return $this->redirect($batchActionDto->getReferrerUrl());
+    }
+
+    public function setConfirmedStatusSingle(AdminContext $context)
+    {
+        $campain = $context->getEntity()->getInstance()->setStatus(CampainRegistration::STATUS_COMPLETED);
+        $this->em->persist($campain);
+        $this->em->flush();
+        return $this->redirect($context->getReferrer());
     }
 
     public function setRejectedStatus(BatchActionDto $batchActionDto): RedirectResponse
     {
-        $this->setStatus($batchActionDto, 3);
+        $this->setStatus($batchActionDto, CampainRegistration::STATUS_REFUSED);
         return $this->redirect($batchActionDto->getReferrerUrl());
+    }
+
+    public function setRejectedStatusSingle(AdminContext $context)
+    {
+        $campain = $context->getEntity()->getInstance()->setStatus(CampainRegistration::STATUS_REFUSED);
+        $this->em->persist($campain);
+        $this->em->flush();
+        return $this->redirect($context->getReferrer());
     }
 
     public function setStatus(BatchActionDto $batchActionDto, $status)
