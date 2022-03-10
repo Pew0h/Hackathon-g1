@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Campains Listing
+{% endblock %}
+
+{# STYLES #}
+{% block styles %}
+	{{ encore_entry_link_tags('campains-listing') }}
+{% endblock %}
+
+{# SCRIPTS #}
+{% block scripts %}
+	{{ encore_entry_script_tags('campains-listing') }}
+{% endblock %}
+
+{% block body %}
+	<div class="container campains-listing">
+		<div class="row">
+			{% for campain in campains %}
+				<div class="col-4">
+					<div class="card">
+						<div class="card-header">
+							<img src="{{ asset("/uploads/" ~ campain.company.image) }}" alt="">
+							<h3>{{ campain.name }}</h3>
+							<small>{{ campain.startDate|date("d-m-Y") }}
+								-
+								{{ campain.endDate|date("d-m-Y") }}</small>
+						</div>
+						<div class="card-body">
+							{{ campain.description|raw }}
+							<a href="#register_campain={{ campain.id }}">Ask to be a tester</a>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

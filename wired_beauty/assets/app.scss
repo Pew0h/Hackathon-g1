@@ -79,22 +79,25 @@ input::placeholder {
 a.button,
 input.button,
 .button {
-  display: inline-block;
-  width: auto;
+  height: 4.6rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   padding: 1rem 3rem;
   color: var(--color-white);
   background-color: var(--color-primary);
   text-align: center;
   text-decoration: none;
   font-size: 1.6rem;
-  border: none;
-  border-radius: 5rem;
+  border-radius: 23px;
+  border: .1rem solid var(--color-white);
   cursor: pointer;
-  transform: scale(1);
-  transition: transform .3s ease;
+  transition: all .2s;
 
   &:hover {
-      transform: scale(1.1);
+    --new-width: .2rem;
+    padding: calc(1rem - var(--new-width)) calc(3rem - var(--new-width));
+    border-width: calc(.1rem + var(--new-width));
   }
 }
 

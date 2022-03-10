@@ -32,8 +32,8 @@ class Company
 
     public function __construct()
     {
-        $this->products = new Collection();
-        $this->campains = new Collection();
+        // $this->products = new Collection();
+        // $this->campains = new Collection();
     }
 
     public function __toString()
