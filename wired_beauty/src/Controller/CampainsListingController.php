@@ -67,8 +67,19 @@ class CampainsListingController extends AbstractController
     #[Route('/campains/Subscribed', name: 'campains_subscribed_listing')]
     public function listSubscribedCampains(): Response
     {
+        $user = $this->security->getUser();
+        $campains = [];
+        foreach ($user->getCampainRegistrations() as $user_reg) {
+            $date = $user_reg->getcampain()->getStartDate()->format("d-m-Y");
+            $campains[$date . "_" . $user_reg->getCampain()->getId()] = $user_reg->getCampain();
+        }
+        ksort($campains);
 
-        return $this->render('campains_listing/index.html.twig', [
+        return $this->render('campains_listing/subscribed.html.twig', [
+            'controller_name'   => 'CampainsListingController',
+            "campains"          => $campains,
+        ]);
+        return $this->render('campains_listing/subscribed.html.twig', [
             'controller_name' => 'CampainsListingController',
         ]);
     }

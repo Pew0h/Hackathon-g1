@@ -1,38 +1,85 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CampainsListingController!
+{% block title %}Campains Listing
+{% endblock %}
+
+{# STYLES #}
+{% block styles %}
+	{{ encore_entry_link_tags('campains-listing') }}
+{% endblock %}
+
+{# SCRIPTS #}
+{% block scripts %}
+	{{ encore_entry_script_tags('campains-listing') }}
 {% endblock %}
 
 {% block body %}
-	<style>
-		.example-wrapper {
-			margin: 1em auto;
-			max-width: 800px;
-			width: 95%;
-			font: 18px / 1.5 sans-serif;
-		}
-		.example-wrapper code {
-			background: #F5F5F5;
-			padding: 2px 6px;
-		}
-	</style>
+	<div class="container campains-listing">
+		<div class="row">
+			<div class="col-2 menu">
+				<ul>
+					<li>
+						<a href="{{ url("campains_listing") }}">All campains</a>
+					</li>
+					<li class='active'>
+						<a href="{{ url("campains_subscribed_listing") }}">Subscribed campains</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-10">
+				<div class="row">
+					{% for campain in campains %}
 
-	<div class="example-wrapper">
-		<h1>Hello
-			{{ controller_name }}! ✅</h1>
+						{% set checker = false %}
+						{% set campainReg = "" %}
 
-		This friendly message is coming from:
-		<ul>
-			<li>Your controller at
-				<code>
-					<a href="{{ '/private/var/www/HACKATON_ESGI/Hackathon-g1/Hackathon-g1/wired_beauty/src/Controller/CampainsListingController.php'|file_link(0) }}">src/Controller/CampainsListingController.php</a>
-				</code>
-			</li>
-			<li>Your template at
-				<code>
-					<a href="{{ '/private/var/www/HACKATON_ESGI/Hackathon-g1/Hackathon-g1/wired_beauty/templates/campains_listing/index.html.twig'|file_link(0) }}">templates/campains_listing/index.html.twig</a>
-				</code>
-			</li>
-		</ul>
+						{% for user_reg in app.user.campainRegistrations %}
+							{% if user_reg.campain.id == campain.id %}
+								{% set checker = true %}
+								{% set campainReg = user_reg %}
+							{% endif %}
+						{% endfor %}
+
+						<div class="col-4">
+							<div class="card">
+								<div class="card-header">
+									<div class="company-img">
+										{% if (campain.company) != "" %}
+											{% if campain.company.image %}
+												<img src="{{ asset("/uploads/" ~ campain.company.image) }}" alt="">
+											{% endif %}
+										{% endif %}
+									</div>
+									<h3>{{ campain.name }}</h3>
+									<small>{{ campain.startDate|date("d-m-Y") }}
+										-
+										{{ campain.endDate|date("d-m-Y") }}</small>
+								</div>
+								<div class="card-body">
+									{% if (campain.description) %}
+										{{ campain.description|striptags|slice(0, 50) ~ '...' }}
+									{% endif %}
+									{% if checker == true %}
+										{% if campainReg.status == 0 %}
+											<span class='status pending'>Pending</span>
+										{% elseif campainReg.status == 1 %}
+											<span class='status accepted'>Accepted</span>
+										{% elseif campainReg.status == 2 %}
+											<span class='status completed'>Completed</span>
+										{% elseif campainReg.status == 3 %}
+											<span class='status refused'>Refused</span>
+										{% endif %}
+
+										<a class='white button' href="{{ url("campains_single") }}?campain_id={{ campain.id }}">See details</a>
+									{% else %}
+										<a class='register button' href="{{ url("campains_single") }}?campain_id={{ campain.id }}">Ask to be a tester</a>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
 	</div>
 {% endblock %}
