@@ -110,10 +110,10 @@ header {
 }
 
 .nav-icon-5:not(.open):hover span:nth-child(1){
-  transform: rotate(-3deg) scaleY(1.1);
+  transform: rotate(3deg) scaleY(1.1);
 }
 .nav-icon-5:not(.open):hover span:nth-child(2){
-  transform: rotate(3deg) scaleY(1.1);
+  transform: rotate(-3deg) scaleY(1.1);
 }
 .nav-icon-5.open span:nth-child(1){
   width: 30px;
