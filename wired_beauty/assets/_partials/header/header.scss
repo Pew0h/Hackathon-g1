@@ -1,7 +1,6 @@
 /* Header Class CSS */
 
 header {
-
   nav {
     display: flex;
     align-items: center;
@@ -39,7 +38,8 @@ header {
     width: 0;
     height: calc(100vh - 10rem);
     overflow: hidden;
-    transition: width .4s ease;
+    transition: width 0.4s ease;
+    z-index: 10000;
 
     &.active {
       width: 40rem;
@@ -58,7 +58,6 @@ header {
         margin: 0;
         padding: 4rem;
         background-color: var(--color-primary);
-        z-index: 10000;
 
         li {
           margin-bottom: 1rem;
@@ -68,10 +67,10 @@ header {
             font-size: 2.6rem;
             color: var(--color-white);
             transform: translateX(0);
-            transition: transform .3s;
+            transition: transform 0.3s;
 
             &:hover {
-              transform: translateX(.5rem);
+              transform: translateX(0.5rem);
             }
           }
         }
@@ -81,7 +80,7 @@ header {
 }
 
 /* nav-icon-5 */
-.nav-icon-5{
+.nav-icon-5 {
   width: 50px;
   height: 12px;
   margin: 25px 10px 10px 10px;
@@ -89,38 +88,38 @@ header {
   cursor: pointer;
   display: inline-block;
 }
-.nav-icon-5 span{
-  background-color:#000000;
+.nav-icon-5 span {
+  background-color: #000000;
   position: absolute;
   border-radius: 2px;
-  transition: .3s ease;
-  width:100%;
+  transition: 0.3s ease;
+  width: 100%;
   height: 1px;
   transition-duration: 500ms;
   opacity: 1;
 }
-.nav-icon-5 span:nth-child(1){
-  top:0px;
+.nav-icon-5 span:nth-child(1) {
+  top: 0px;
   left: 0px;
 }
-.nav-icon-5 span:nth-child(2){
-  top:8px;
+.nav-icon-5 span:nth-child(2) {
+  top: 8px;
   left: 0px;
-  opacity:1;
+  opacity: 1;
 }
 
-.nav-icon-5:not(.open):hover span:nth-child(1){
+.nav-icon-5:not(.open):hover span:nth-child(1) {
   transform: rotate(3deg) scaleY(1.1);
 }
-.nav-icon-5:not(.open):hover span:nth-child(2){
+.nav-icon-5:not(.open):hover span:nth-child(2) {
   transform: rotate(-3deg) scaleY(1.1);
 }
-.nav-icon-5.open span:nth-child(1){
+.nav-icon-5.open span:nth-child(1) {
   width: 30px;
   transform: rotate(45deg);
   top: 4px;
 }
-.nav-icon-5.open span:nth-child(2){
+.nav-icon-5.open span:nth-child(2) {
   width: 30px;
   transform: rotate(-45deg);
   top: 4px;
