@@ -58,6 +58,7 @@ class CampainRegistrationCrudController extends AbstractBaseCrudController
             ChoiceField::new("status")->setChoices([
                 "Pending" => CampainRegistration::STATUS_PENDING,
                 "Accepted" => CampainRegistration::STATUS_ACCEPTED,
+                "Completed" => CampainRegistration::STATUS_COMPLETED,
                 "Refused" => CampainRegistration::STATUS_REFUSED,
             ])->hideWhenCreating(),
         ];
