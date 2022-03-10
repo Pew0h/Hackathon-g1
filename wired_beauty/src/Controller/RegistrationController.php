@@ -61,6 +61,7 @@ class RegistrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($user);
             $entityManager->flush();
+            $this->addFlash( 'success', 'Your changes were saved!' );
         }
 
         return $this->render('edit-profile.html.twig', [
