@@ -30,3 +30,103 @@
     }
   }
 }
+
+.campains-single {
+  .campain {
+    text-align: center;
+    .title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      h2 {
+        margin: 20px 0;
+      }
+
+      .button.white {
+        background-color: var(--color-white);
+        color: var(--color-primary);
+        border: 1px solid var(--color-primary);
+
+        &:hover {
+          padding: 1rem 3rem;
+        }
+      }
+    }
+
+    .dates {
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: 70%;
+        height: 1px;
+        left: 50%;
+        bottom: 0;
+        background-color: #a5a5a5;
+        transform: translateX(-50%);
+      }
+    }
+
+    .description {
+      text-align: left;
+      margin-top: 30px;
+    }
+  }
+
+  .row.product-company {
+    position: relative;
+    margin-top: 30px;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 100px;
+      height: 1px;
+      background-color: #a5a5a5;
+      transform: translateX(-50%);
+    }
+  }
+
+  .product,
+  .company {
+    font-size: 1.5rem;
+  }
+
+  .product {
+    position: relative;
+    padding-right: 30px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 50%;
+      width: 1px;
+      height: 40%;
+      background-color: #a5a5a5;
+      transform: translateY(-50%);
+    }
+  }
+  .company {
+    padding-left: 30px;
+  }
+
+  .product-header,
+  .company-header {
+    text-align: center;
+
+    img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      margin-top: 30px;
+    }
+
+    h4 {
+      margin-top: 10px;
+    }
+  }
+}

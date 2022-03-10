@@ -36,24 +36,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string')]
     private $firstname;
-    
+
     #[ORM\Column(type: 'string')]
     private $lastname;
-    
+
     #[Assert\GreaterThan(value: 17)]
     #[ORM\Column(type: 'integer')]
     private $age;
-    
+
     #[ORM\Column(type: 'integer')]
     private $height;
-    
+
     #[ORM\Column(type: 'integer')]
     private $weight;
-    
+
     #[Assert\NotBlank]
     #[ORM\Column(type: 'float')]
     private $latitude;
-    
+
     #[ORM\Column(type: 'float')]
     private $longitude;
 
@@ -65,8 +65,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->campainRegistrations = new ArrayCollection();
     }
 
-    public function __toString() {
-        return "#".$this->getId() . " " . $this->firstname . " " . $this->lastname;
+    public function __toString()
+    {
+        return "#" . $this->getId() . " " . $this->firstname . " " . $this->lastname;
     }
 
     public function getId(): ?int
@@ -115,7 +116,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function checkRole($user, $role) {
+    public function checkRole($user, $role)
+    {
         $has_role = false;
         if ($user) {
             if (in_array($role, $user->getRoles())) {
@@ -145,7 +147,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getPlainPassword(): string
     {
-        return $this->plainPassword ?? '' ;
+        return $this->plainPassword ?? '';
     }
 
     /**
@@ -159,7 +161,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Get the value of firstname
-     */ 
+     */
     public function getFirstname()
     {
         return $this->firstname;
@@ -169,7 +171,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Set the value of firstname
      *
      * @return  self
-     */ 
+     */
     public function setFirstname($firstname)
     {
         $this->firstname = $firstname;
@@ -179,7 +181,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Get the value of lastname
-     */ 
+     */
     public function getLastname()
     {
         return $this->lastname;
@@ -189,7 +191,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Set the value of lastname
      *
      * @return  self
-     */ 
+     */
     public function setLastname($lastname)
     {
         $this->lastname = $lastname;
@@ -197,13 +199,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getFullname() {
+    public function getFullname()
+    {
         return $this->firstname . " " . $this->lastname;
     }
 
     /**
      * Get the value of age
-     */ 
+     */
     public function getAge()
     {
         return $this->age;
@@ -213,7 +216,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Set the value of age
      *
      * @return  self
-     */ 
+     */
     public function setAge($age)
     {
         $this->age = $age;
@@ -223,7 +226,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Get the value of height
-     */ 
+     */
     public function getHeight()
     {
         return $this->height;
@@ -233,7 +236,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Set the value of height
      *
      * @return  self
-     */ 
+     */
     public function setHeight($height)
     {
         $this->height = $height;
@@ -243,7 +246,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Get the value of weight
-     */ 
+     */
     public function getWeight()
     {
         return $this->weight;
@@ -253,7 +256,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Set the value of weight
      *
      * @return  self
-     */ 
+     */
     public function setWeight($weight)
     {
         $this->weight = $weight;
@@ -263,7 +266,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Get the value of latitude
-     */ 
+     */
     public function getLatitude()
     {
         return $this->latitude;
@@ -273,7 +276,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Set the value of latitude
      *
      * @return  self
-     */ 
+     */
     public function setLatitude($latitude)
     {
         $this->latitude = $latitude;
@@ -283,7 +286,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Get the value of longitude
-     */ 
+     */
     public function getLongitude()
     {
         return $this->longitude;
@@ -293,7 +296,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Set the value of longitude
      *
      * @return  self
-     */ 
+     */
     public function setLongitude($longitude)
     {
         $this->longitude = $longitude;

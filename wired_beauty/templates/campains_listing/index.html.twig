@@ -20,7 +20,11 @@
 				<div class="col-4">
 					<div class="card">
 						<div class="card-header">
-							<img src="{{ asset("/uploads/" ~ campain.company.image) }}" alt="">
+							{% if (campain.company) != "" %}
+								{% if campain.company.image %}
+									<img src="{{ asset("/uploads/" ~ campain.company.image) }}" alt="">
+								{% endif %}
+							{% endif %}
 							<h3>{{ campain.name }}</h3>
 							<small>{{ campain.startDate|date("d-m-Y") }}
 								-
@@ -28,7 +32,7 @@
 						</div>
 						<div class="card-body">
 							{{ campain.description|raw }}
-							<a href="#register_campain={{ campain.id }}">Ask to be a tester</a>
+							<a class='register button' href="{{ url("campains_single") }}?campain_id={{ campain.id }}">Ask to be a tester</a>
 						</div>
 					</div>
 				</div>
