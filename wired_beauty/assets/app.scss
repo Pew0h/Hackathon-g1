@@ -79,7 +79,7 @@ input::placeholder {
 a.button,
 input.button,
 .button {
-  height: 4.6rem;
+  min-height: 4.6rem;
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -98,6 +98,17 @@ input.button,
     --new-width: .2rem;
     padding: calc(1rem - var(--new-width)) calc(3rem - var(--new-width));
     border-width: calc(.1rem + var(--new-width));
+  }
+
+  &.white {
+    background-color: var(--color-white);
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    cursor: initial;
+
+    &:hover {
+      padding: 1rem 3rem;
+    }
   }
 }
 
