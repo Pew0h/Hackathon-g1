@@ -14,23 +14,27 @@
 {% endblock %}
 
 {% block body %}
-	<div class="campaign container">
+	<div class="campain container">
 		<div class="row">
 			<div class="col-3">
 				<div class="campain__company-container">
-					<p class="campain__company-container__title">{{ campain.company.name }}</p>
 					{% if campain.company.image %}
 						<img class="campain__company-container__image" src="{{ asset("/uploads/" ~ campain.company.image) }}" alt="">
+					{% else %}
+						<h3 class="campain__company-container__title">{{ campain.company.name }}</h3>
 					{% endif %}
 					<p class="campain__company-container__content">{{ campain.company.description|raw }}</p>
 				</div>
 			</div>
 			<div class="col-8 offset-1">
-				<h3 class="campain__title">{{ campain.name }}</h3>
+				<h2 class="campain__title">{{ campain.name }}</h2>
 				<div class='campain__date text-small'>{{ campain.startDate|date("d/m/Y") }} - {{ campain.endDate|date("d/m/Y") }}</div>
+				
+				<h3>Description</h3>
 				<p class="campain__description">{{ campain.description|raw }}</p>
+
 				<div class="campain__product-container">
-					<p class="campain__product-container__title">{{ campain.product.name }}</p>
+					<h3 class="campain__company-container__title">{{ campain.product.name }}</h3>
 					{% if campain.product.image %}
 						<img class="campain__company-container__image" src="{{ asset("/uploads/" ~ campain.product.image) }}" alt="">
 					{% endif %}
@@ -41,6 +45,7 @@
 				{% else %}
 					<a href="?campain_id={{ campain.id }}&register=true" class='button register'>Ask to be a tester</a>
 				{% endif %}
+
 			</div>
 		</div>
 	</div>

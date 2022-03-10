@@ -97,6 +97,10 @@
 
 	.campain {
 
+		h3 {
+			margin-bottom: 1rem;
+		}
+
 		&__title {
 			margin-top: 0;
 			margin-bottom: 1rem;
@@ -107,14 +111,20 @@
 			margin-bottom: 2rem;
 		}
 
+		&__description {
+			margin-top: 0;
+		}
+
 		&__company-container {
-			margin: 3rem 0;
 
 			&__title {
 				margin-top: 0;
 				margin-bottom: 1rem;
-				font-size: 2.2rem;
-				font-weight: bold;
+			}
+			
+			&__image {
+				width: 100%;
+				max-width: 40rem;
 			}
 
 			&__content {
@@ -128,8 +138,11 @@
 			&__title {
 				margin-top: 0;
 				margin-bottom: 1rem;
-				font-size: 2.2rem;
-				font-weight: bold;
+			}
+
+			&__image {
+				width: 100%;
+				max-width: 40rem;
 			}
 
 			&__content {
