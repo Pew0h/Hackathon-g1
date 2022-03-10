@@ -29,6 +29,18 @@ class CampainsListingController extends AbstractController
         return $this->render('campains_listing/index.html.twig', [
             'controller_name'   => 'CampainsListingController',
             "campains"          => $campains,
+            "menu"              => [
+                [
+                    "title" => "All campains",
+                    "class" => "active",
+                    "route" => "campains_listing"
+                ],
+                [
+                    "title" => "Subscribed campains",
+                    "class" => "",
+                    "route" => "campains_subscribed_listing"
+                ],
+            ]
         ]);
     }
 
@@ -75,12 +87,21 @@ class CampainsListingController extends AbstractController
         }
         ksort($campains);
 
-        return $this->render('campains_listing/subscribed.html.twig', [
+        return $this->render('campains_listing/index.html.twig', [
             'controller_name'   => 'CampainsListingController',
             "campains"          => $campains,
-        ]);
-        return $this->render('campains_listing/subscribed.html.twig', [
-            'controller_name' => 'CampainsListingController',
+            "menu"              => [
+                [
+                    "title" => "All campains",
+                    "class" => "",
+                    "route" => "campains_listing"
+                ],
+                [
+                    "title" => "Subscribed campains",
+                    "class" => "active",
+                    "route" => "campains_subscribed_listing"
+                ],
+            ]
         ]);
     }
 

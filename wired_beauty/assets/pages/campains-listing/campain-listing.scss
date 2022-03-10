@@ -48,7 +48,7 @@
         display: block;
         width: max-content;
         margin: 10px auto 5px;
-        padding-left: 20px;
+        padding-left: 10px;
         font-size: 1.4rem;
         color: #a5a5a5;
 
@@ -69,6 +69,14 @@
 
           &::before {
             background-color: var(--color-green);
+          }
+        }
+
+        &.completed {
+          color: #3498db;
+
+          &::before {
+            background-color: #3498db;
           }
         }
 
@@ -172,11 +180,15 @@
   .company-header {
     text-align: center;
 
+    .product-img,
+    .company-img {
+      margin: 20px 0;
+      height: 100px;
+    }
     img {
       width: 100px;
-      height: 100px;
+      height: 100%;
       object-fit: contain;
-      margin-top: 30px;
     }
 
     h4 {
