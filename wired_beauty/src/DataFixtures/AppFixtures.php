@@ -268,53 +268,6 @@ class AppFixtures extends Fixture
             $campains[] = $campain;
         };
 
-        // Création de datas campain_registration
-        $data_campain_registration = [
-
-            [
-                'tester'        => $users[rand(0, count($users) - 1)],
-                'campain'       => $campains[rand(0, count($campains) - 1)],
-                'status'        => '0',
-            ],
-            [
-                'tester'        =>  $users[rand(0, count($users) - 1)],
-                'campain'       =>  $campains[rand(0, count($campains) - 1)],
-                'status'        => '0',
-            ],
-            [
-                'tester'        =>  $users[rand(0, count($users) - 1)],
-                'campain'       =>  $campains[rand(0, count($campains) - 1)],
-                'status'        => '0',
-            ],
-            [
-                'tester'        =>  $users[rand(0, count($users) - 1)],
-                'campain'       =>  $campains[rand(0, count($campains) - 1)],
-                'status'        => '0',
-            ],
-            [
-                'tester'        =>  $users[rand(0, count($users) - 1)],
-                'campain'       =>  $campains[rand(0, count($campains) - 1)],
-                'status'        => '0',
-            ],
-            [
-                'tester'        =>  $users[rand(0, count($users) - 1)],
-                'campain'       =>  $campains[rand(0, count($campains) - 1)],
-                'status'        => '0',
-            ]
-        ];
-
-        foreach ($data_campain_registration as $data) {
-            $campain_registration = new CampainRegistration();
-            $campain_registration
-                ->setTester($data['tester'])
-                ->setCampain($data['campain'])
-                ->setStatus($data['status']);
-
-            $manager->persist($campain_registration);
-        };
-
-
-
         $manager->flush();
     }
 }
