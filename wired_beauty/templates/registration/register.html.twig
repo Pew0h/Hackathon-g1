@@ -1,79 +1,81 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Register
+{% endblock %}
 
 {# STYLES #}
 {% block styles %}
-   {{ encore_entry_link_tags('register') }}
+	{{ encore_entry_link_tags('register') }}
 {% endblock %}
 
 {# SCRIPTS #}
 {% block scripts %}
-   {{ encore_entry_script_tags('register') }}
+	{{ encore_entry_script_tags('register') }}
 {% endblock %}
 
 {% block body %}
-    <div class="container d-flex justify-content-center">
-        <div class="col-6">
-            <h1>Register</h1>
-            {{ form_start(registrationForm) }}
-                <div class="row flex-wrap">
-                    <div class="form-row col-6">
-                        <p>{{ form_label(registrationForm.firstname) }}</p>
-                        {{ form_widget(registrationForm.firstname) }}
-                        <div class="error">{{ form_errors(registrationForm.firstname) }}</div>
-                    </div>
-                    <div class="form-row col-6">
-                        <p>{{ form_label(registrationForm.lastname) }}</p>
-                        {{ form_widget(registrationForm.lastname) }}
-                        <div class="error">{{ form_errors(registrationForm.lastname) }}</div>
-                    </div>
-                    <div class="form-row col-12">
-                        <p>{{ form_label(registrationForm.email) }}</p>
-                        {{ form_widget(registrationForm.email) }}
-                        <div class="error">{{ form_errors(registrationForm.email) }}</div>
-                    </div>
-                    <div class="form-row col-4">
-                        <p>{{ form_label(registrationForm.age) }}</p>
-                        {{ form_widget(registrationForm.age) }}
-                        <div class="error">{{ form_errors(registrationForm.age) }}</div>
-                    </div>
-                    <div class="form-row col-4">
-                        <p>{{ form_label(registrationForm.height) }}</p>
-                        {{ form_widget(registrationForm.height) }}
-                        <div class="error">{{ form_errors(registrationForm.height) }}</div>
-                    </div>
-                    <div class="form-row col-4">
-                        <p>{{ form_label(registrationForm.weight) }}</p>
-                        {{ form_widget(registrationForm.weight) }}
-                        <div class="error">{{ form_errors(registrationForm.weight) }}</div>
-                    </div>
-                    <div class="search-city form-row col-12 display-results">
-                        <p>{{ form_label(registrationForm.city) }}</p>
-                        <span class="search-city__container-input">{{ form_widget(registrationForm.city) }}</span>
-                        <div class="d-flex justify-content-end">
-                            <span class="search-city__remove text-small">Remove</span>
-                        </div>
-                        <div class="error">{{ form_errors(registrationForm.latitude) }}</div>
-                        <div class="search-city__container-results"></div>
-                    </div>
-                    <div class="form-row col-12">
-                        <p>{{ form_label(registrationForm.plainPassword) }}</p>
-                        <p>{{ form_widget(registrationForm.plainPassword.first) }}</p>
-                        <p>{{ form_widget(registrationForm.plainPassword.second) }}</p>
-                        <div class="error">{{ form_errors(registrationForm.plainPassword.first) }}</div>
-                    </div>
-                    <div class="form-row col-12">
-                        <p class="d-flex align-items-center">{{ form_widget(registrationForm.agreeTerms) }} Agree terms</p>
-                    </div>
-                    <div class="d-none">
-                        {{ form_row(registrationForm.latitude) }}
-                        {{ form_row(registrationForm.longitude) }}
-                    </div>
-                </div>
-                <button type="submit" class="button w-100">Register</button>
-            {{ form_end(registrationForm) }}
-        </div>
-    </div>
+	<div class="container d-flex justify-content-center">
+		<div class="col-6">
+			<h1>Register</h1>
+			{{ form_start(registrationForm) }}
+			<div class="row flex-wrap">
+				<div class="form-row col-6">
+					<p>{{ form_label(registrationForm.firstname) }}</p>
+					{{ form_widget(registrationForm.firstname) }}
+					<div class="error">{{ form_errors(registrationForm.firstname) }}</div>
+				</div>
+				<div class="form-row col-6">
+					<p>{{ form_label(registrationForm.lastname) }}</p>
+					{{ form_widget(registrationForm.lastname) }}
+					<div class="error">{{ form_errors(registrationForm.lastname) }}</div>
+				</div>
+				<div class="form-row col-12">
+					<p>{{ form_label(registrationForm.email) }}</p>
+					{{ form_widget(registrationForm.email) }}
+					<div class="error">{{ form_errors(registrationForm.email) }}</div>
+				</div>
+				<div class="form-row col-4">
+					<p>{{ form_label(registrationForm.age) }}</p>
+					{{ form_widget(registrationForm.age) }}
+					<div class="error">{{ form_errors(registrationForm.age) }}</div>
+				</div>
+				<div class="form-row col-4">
+					<p>{{ form_label(registrationForm.height) }}</p>
+					{{ form_widget(registrationForm.height) }}
+					<div class="error">{{ form_errors(registrationForm.height) }}</div>
+				</div>
+				<div class="form-row col-4">
+					<p>{{ form_label(registrationForm.weight) }}</p>
+					{{ form_widget(registrationForm.weight) }}
+					<div class="error">{{ form_errors(registrationForm.weight) }}</div>
+				</div>
+				<div class="search-city form-row col-12 display-results">
+					<p>{{ form_label(registrationForm.city) }}</p>
+					<span class="search-city__container-input">{{ form_widget(registrationForm.city) }}</span>
+					<div class="d-flex justify-content-end">
+						<span class="search-city__remove text-small">Remove</span>
+					</div>
+					<div class="error">{{ form_errors(registrationForm.latitude) }}</div>
+					<div class="search-city__container-results"></div>
+				</div>
+				<div class="form-row col-12">
+					<p>{{ form_label(registrationForm.plainPassword) }}</p>
+					<p>{{ form_widget(registrationForm.plainPassword.first) }}</p>
+					<p>{{ form_widget(registrationForm.plainPassword.second) }}</p>
+					<div class="error">{{ form_errors(registrationForm.plainPassword.first) }}</div>
+				</div>
+				<div class="form-row col-12">
+					<p class="d-flex align-items-center">{{ form_widget(registrationForm.agreeTerms) }}
+						Agree terms</p>
+				</div>
+				<div class="d-none">
+					{{ form_row(registrationForm.latitude) }}
+					{{ form_row(registrationForm.longitude) }}
+				</div>
+			</div>
+			<button type="submit" class="button w-100">Register</button>
+			{{ form_end(registrationForm) }}
+		</div>
+	</div>
 
 {% endblock %}

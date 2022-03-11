@@ -72,6 +72,9 @@ class RegistrationFormType extends AbstractType
                         'message' => 'You should agree to our terms.',
                     ]),
                 ],
+                'attr'  => [
+                    'class' => "w-auto"
+                ]
             ])
             ->add('plainPassword', RepeatedType::class, [
                 // instead of being set onto the object directly,
@@ -113,8 +116,7 @@ class RegistrationFormType extends AbstractType
                     'autocomplete' => 'nope',
                     'class' => 'search-city-input'
                 ]
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

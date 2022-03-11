@@ -29,11 +29,12 @@ class CampainRegistration
 
     const STATUS_PENDING = 0;
     const STATUS_ACCEPTED = 1;
-    const STATUS_REFUSED = 2;
+    const STATUS_COMPLETED = 2;
+    const STATUS_REFUSED = 3;
 
     public function __toString()
     {
-        return $this->campain . " " . $this->tester;
+        return $this->campain . " | " . $this->tester->getFullname();
     }
 
     public function getId(): ?int

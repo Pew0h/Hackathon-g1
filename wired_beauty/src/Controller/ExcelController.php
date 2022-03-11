@@ -17,16 +17,21 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ExcelController extends AbstractController
 {
-    private $em;
+    static private $em;
 
     public function __construct(EntityManagerInterface $em)
     {
-        $this->em = $em;
+        self::$em = $em;
     }
 
-    public function parseExcelToJson($file_path, $campain, $qcm_name)
+    static public function parseExcelToJson($file_path, $campain, $qcm_name, $fixtures = false)
     {
-        $file = new File("Excels/" . $file_path);
+        if (!$fixtures) {
+            $file = new File('Excels/' . $file_path); //"../../public/Excels/" . 
+        } else {
+            $file = new File($file_path); //"../../public/Excels/" . 
+        }
+
         $reader = new Xlsx();
         $spreadsheet = $reader->load($file);
         $sheet = $spreadsheet->getActiveSheet();
@@ -60,21 +65,23 @@ class ExcelController extends AbstractController
                 }
             }
         }
-        $qcm = $this->addQCMToDatabase($array, $campain, $qcm_name);
+        $qcm = self::addQCMToDatabase($array, $campain, $qcm_name);
 
-        $filesystem = new Filesystem();
-        $filesystem->remove($file);
+        if (!$fixtures) {
+            $filesystem = new Filesystem();
+            $filesystem->remove($file);
+        }
         return $qcm;
     }
 
-    public function addQCMToDatabase(array $array, $campain, $qcm_name)
+    static public function addQCMToDatabase(array $array, $campain, $qcm_name)
     {
 
         // Create QCM
         $qcm = new Qcm();
         $qcm->setName($qcm_name);
         $qcm->setCampain($campain);
-        $this->em->persist($qcm);
+        self::$em->persist($qcm);
 
         // Get the total number of questions
         $questions_numbers = 0;
@@ -90,15 +97,15 @@ class ExcelController extends AbstractController
             $questions = new Question();
             $questions->setQcm($qcm);
             $questions->setName($array[$i]['question']);
-            $this->em->persist($questions);
-            $this->em->flush();
+            self::$em->persist($questions);
+            self::$em->flush();
             foreach ($array[$i]['response'] as $value) {
                 $choice = new Choice();
                 $choice->setQuestion($questions);
                 $choice->setValue($value);
-                $this->em->persist($choice);
+                self::$em->persist($choice);
             }
-            $this->em->flush();
+            self::$em->flush();
         }
 
         return $qcm;

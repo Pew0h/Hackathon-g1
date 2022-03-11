@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Campains Listing
+{% endblock %}
+
+{# STYLES #}
+{% block styles %}
+	{{ encore_entry_link_tags('campains-listing') }}
+{% endblock %}
+
+{# SCRIPTS #}
+{% block scripts %}
+	{{ encore_entry_script_tags('campains-listing') }}
+{% endblock %}
+
+{% block body %}
+	<div class="campain container">
+		<div class="row">
+			<div class="col-12 mb-5">
+				<a id="back-to-list" href="{{ url("campains_listing") }}">Back to campains</a>
+			</div>
+			<div class="col-3">
+				<div class="campain__company-container">
+					{% if campain.company %}
+						{% if campain.company.image %}
+							<img class="campain__company-container__image" src="{{ asset("/uploads/" ~ campain.company.image) }}" alt="">
+						{% else %}
+							<h3 class="campain__company-container__title">{{ campain.company.name }}</h3>
+						{% endif %}
+						<p class="campain__company-container__content">{{ campain.company.description|raw }}</p>
+					{% endif %}
+				</div>
+			</div>
+			<div class="col-8 offset-1">
+				<h2 class="campain__title">{{ campain.name }}</h2>
+				<div class='campain__date text-small'>{{ campain.startDate|date("d/m/Y") }}
+					-
+					{{ campain.endDate|date("d/m/Y") }}</div>
+
+				{% if already_asked %}
+					{% set s = status / 1 %}
+
+					{% if s is same as(0) %}
+						<button class='button white'>Pending</button>
+					{% elseif s is same as(1) %}
+						<button class='button white'>Accepted</button>
+					{% elseif s is same as(2) %}
+						<p class='campain__thanks'>You already have answered this campain.<br/>{{campain.company.name}}
+							thanks you for your time</p>
+						<button class='button white'>Completed</button>
+					{% elseif s is same as(3) %}
+						<button class='button white'>Refused</button>
+					{% endif %}
+
+				{% else %}
+					{# <a href="?register=true" class='button register'>Ask to be a tester</a> #}
+					<a href="{{ path('register_campain', {'campain': campain.id}) }}" class='button register'>Ask to be a tester</a>
+				{% endif %}
+
+				<h3>Description</h3>
+				<p class="campain__description">{{ campain.description|raw }}</p>
+				{% if campain.product %}
+					<div class="campain__product-container">
+						<h3 class="campain__company-container__title">{{ campain.product.name }}</h3>
+						{% if campain.product.image %}
+							<img class="campain__company-container__image" src="{{ asset("/uploads/" ~ campain.product.image) }}" alt="">
+						{% endif %}
+						<p class="campain__product-container__content">{{ campain.product.description|raw }}</p>
+					</div>
+				{% endif %}
+
+				{% if already_asked %}
+					{% if s is same as(1) and campain.qcm %}
+						<h3>QCM</h3>
+						{{ form_start(form) }}
+						{% for index in 1..formLength %}
+							<div class="form-row">
+								<p>{{ form_label(form['question_' ~ index]) }}</p>
+								{{ form_widget(form['question_' ~ index]) }}
+							</div>
+						{% endfor %}
+						<button type="submit" class="button mt-5 w-100">Register</button>
+						{{ form_end(form) }}
+					{% endif %}
+				{% endif %}
+			</div>
+		</div>
+	</div>
+{% endblock %}

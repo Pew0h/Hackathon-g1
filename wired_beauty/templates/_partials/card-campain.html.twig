@@ -1,0 +1,41 @@
+{# STYLES #}
+{# {% block styles %}
+{% endblock %} #}
+{{ encore_entry_link_tags('card-campain') }}
+
+	<div class="card--campain"> <div class="campain-header">
+		<div class="card--campain__div-img">
+			{% if campain.company and campain.company.image %}
+				<a href="{{ path("campains_single", {'campain': campain.id}) }}" class='card--campain__image'>
+					<img class="card--campain__image" src="{{ asset("/uploads/" ~ campain.company.image) }}" alt="">
+				</a>
+			{% endif %}
+		</div>
+		<h3 clas="card--campain__title">{{ campain.name }}</h3>
+		<span class="card--campain__date">{{ campain.startDate|date("d-m-Y") }}
+			-
+			{{ campain.endDate|date("d-m-Y") }}</span>
+	</div>
+
+	{% if (campain.description) %}
+		<p class="card--campain__description">{{ campain.description|striptags|slice(0, 50) ~ '...' }}</p>
+	{% endif %}
+
+	<div class="card--campain__status-div">
+		{% if checker == true %}
+			{% if campainReg.status == 0 %}
+				<span class='card--campain__status pending'>Pending</span>
+			{% elseif campainReg.status == 1 %}
+				<span class='card--campain__status accepted'>Accepted</span>
+			{% elseif campainReg.status == 2 %}
+				<span class='card--campain__status completed'>Completed</span>
+			{% elseif campainReg.status == 3 %}
+				<span class='card--campain__status refused'>Refused</span>
+			{% endif %}
+			<a class='button white' href="{{ path("campains_single", {'campain': campain.id}) }}">See details</a>
+
+		{% else %}
+			<a class='button' href="{{ path("campains_single", {'campain': campain.id}) }}">Ask to be a tester</a>
+		{% endif %}
+	</div>
+</div>

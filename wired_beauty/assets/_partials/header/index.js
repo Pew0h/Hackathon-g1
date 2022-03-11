@@ -1,4 +1,5 @@
 import './header.scss'
+import './header'
 
 const icons = document.querySelectorAll('.icon');
 icons.forEach (icon => {

@@ -25,6 +25,7 @@ Encore.enableSassLoader()
   // PARTIALS
   .addEntry("header", "./assets/_partials/header")
   .addEntry("footer", "./assets/_partials/footer")
+  .addEntry("card-campain", "./assets/_partials/card-campain")
 
   // PAGES
   .addEntry("home", "./assets/pages/home")
@@ -32,7 +33,8 @@ Encore.enableSassLoader()
   .addEntry("register", "./assets/pages/register")
   .addEntry("edit-profile", "./assets/pages/edit-profile")
   .addEntry("campains-listing", "./assets/pages/campains-listing")
-  .addEntry("admin-app", "./assets/pages/admin-app")
+  .addEntry("admin-stats", "./assets/pages/admin-app/admin-stats")
+  .addEntry("admin-app", "./assets/pages/admin-app/admin-app")
 
   // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
   .enableStimulusBridge("./assets/controllers.json")

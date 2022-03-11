@@ -16,23 +16,35 @@
 {% block body %}
 	<div class="container campains-listing">
 		<div class="row">
-			{% for campain in campains %}
-				<div class="col-4">
-					<div class="card">
-						<div class="card-header">
-							<img src="{{ asset("/uploads/" ~ campain.company.image) }}" alt="">
-							<h3>{{ campain.name }}</h3>
-							<small>{{ campain.startDate|date("d-m-Y") }}
-								-
-								{{ campain.endDate|date("d-m-Y") }}</small>
+			<div class="col-2 menu">
+				<ul>
+					{% for item in menu %}
+						<li class='{{ item.class }}'>
+							<a href="{{ url(item.route) }}">{{ item.title }}</a>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+			<div class="col-10">
+				<div class="row">
+					{% for campain in campains %}
+
+						{% set checker = false %}
+						{% set campainReg = "" %}
+
+						{% for user_reg in app.user.campainRegistrations %}
+							{% if user_reg.campain.id == campain.id %}
+								{% set checker = true %}
+								{% set campainReg = user_reg %}
+							{% endif %}
+						{% endfor %}
+
+						<div class="col-4 ">
+							{% include "_partials/card-campain.html.twig" %}
 						</div>
-						<div class="card-body">
-							{{ campain.description|raw }}
-							<a href="#register_campain={{ campain.id }}">Ask to be a tester</a>
-						</div>
-					</div>
+					{% endfor %}
 				</div>
-			{% endfor %}
+			</div>
 		</div>
 	</div>
 {% endblock %}
