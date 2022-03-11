@@ -69,7 +69,7 @@
 											<span class='status refused'>Refused</span>
 										{% endif %}
 
-										<a class='white button' href="{{ path("campains_single", {'campain': campain.id}) }}">See details</a>
+										<a class='white button pointer' href="{{ path("campains_single", {'campain': campain.id}) }}">See details</a>
 									{% else %}
 										<a class='register button' href="{{ path("campains_single", {'campain': campain.id}) }}">Ask to be a tester</a>
 									{% endif %}
