@@ -29,7 +29,7 @@ class Product
     #[ORM\JoinColumn(nullable: true)]
     private $company;
 
-    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Campain::class)]
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Campain::class, cascade: ["persist"])]
     private $campain;
 
     public function __toString()
