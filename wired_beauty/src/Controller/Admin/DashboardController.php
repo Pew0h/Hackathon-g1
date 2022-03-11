@@ -120,10 +120,10 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud("Survey Answers", "fa fa-voicemail", UserQcmResponse::class),
         ]);
         yield MenuItem::section();
-        yield MenuItem::subMenu("Questions", "fa fa-chart-bar")->setSubItems([
-            MenuItem::linkToCrud("Survey list", "fa fa-chart-bar", Qcm::class),
-            MenuItem::linkToCrud("Question list", "fa fa-chart-bar", Question::class),
-            MenuItem::linkToCrud("Choices list", "fa fa-chart-bar", Choice::class),
+        yield MenuItem::subMenu("Questions", "fa fa-question")->setSubItems([
+            MenuItem::linkToCrud("Survey list", "fa fa-certificate", Qcm::class),
+            MenuItem::linkToCrud("Question list", "fa fa-question", Question::class),
+            MenuItem::linkToCrud("Choices list", "fa fa-list", Choice::class),
         ]);
     }
 
@@ -133,7 +133,5 @@ class DashboardController extends AbstractDashboardController
 
         return $assets
             ->addWebpackEncoreEntry('admin-stats');
-
-
     }
 }
