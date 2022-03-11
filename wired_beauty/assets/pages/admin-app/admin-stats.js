@@ -10,7 +10,6 @@ const labels = [
 ];
 
 const spfData = (document.getElementById('response').value).split(',');
-console.log(spfData);
 
 // Data of the graph
 const data = {
