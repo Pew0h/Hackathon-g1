@@ -5,7 +5,9 @@
 
 <div class="card--campain">
     {% if campain.company and campain.company.image %}
-        <img class="card--campain__image" src="{{ asset("/uploads/" ~ campain.company.image) }}" alt="">
+        <a href="{{ path("campains_single", {'campain': campain.id}) }}">
+            <img class="card--campain__image" src="{{ asset("/uploads/" ~ campain.company.image) }}" alt="">
+        </a>
     {% endif %}
 
     <h3 clas="card--campain__title">{{ campain.name }}</h3>
