@@ -13,6 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
@@ -44,7 +45,7 @@ class ProductCrudController extends AbstractBaseCrudController
             TextField::new('name')->setLabel("Title")->addCssClass('js-row-edit-action'),
             TextEditorField::new('description'),
             ImageField::new("image")->setBasePath("uploads")->setUploadDir("public/uploads"),
-            TextField::new("uv_protection")->setLabel("Protection UV")->hideOnIndex(),
+            NumberField::new("uv_protection")->setLabel("Protection UV")->hideOnIndex(),
             AssociationField::new("company", "Company")->setRequired(true),
             AssociationField::new("campain", "Campain")->setRequired(false),
         ];
