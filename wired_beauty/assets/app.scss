@@ -5,7 +5,7 @@
   --color-primary: #a42c23;
   --color-secondary: #db6a39;
   --color-black: #262626;
-  --color-gray: #a5a5a5;
+  --color-gray: #dedede;
   --color-white: #fafafa;
   --color-green: #3dd643;
 }
@@ -133,7 +133,6 @@ input.button,
     background-color: var(--color-white);
     color: var(--color-primary);
     border: 1px solid var(--color-primary);
-    cursor: initial;
 
     &:hover {
       padding: 1rem 3rem;
