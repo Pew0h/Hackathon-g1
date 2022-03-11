@@ -25,6 +25,7 @@ Encore.enableSassLoader()
   // PARTIALS
   .addEntry("header", "./assets/_partials/header")
   .addEntry("footer", "./assets/_partials/footer")
+  .addEntry("card-campain", "./assets/_partials/card-campain")
 
   // PAGES
   .addEntry("home", "./assets/pages/home")

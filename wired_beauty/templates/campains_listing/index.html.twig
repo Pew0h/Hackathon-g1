@@ -40,41 +40,7 @@
 						{% endfor %}
 
 						<div class="col-4 ">
-							<div class="card">
-								<div class="card-header">
-									<div class="company-img">
-										{% if (campain.company) != "" %}
-											{% if campain.company.image %}
-												<img src="{{ asset("/uploads/" ~ campain.company.image) }}" alt="">
-											{% endif %}
-										{% endif %}
-									</div>
-									<h3>{{ campain.name }}</h3>
-									<small>{{ campain.startDate|date("d-m-Y") }}
-										-
-										{{ campain.endDate|date("d-m-Y") }}</small>
-								</div>
-								<div class="card-body d-flex flex-column">
-									{% if (campain.description) %}
-										{{ campain.description|striptags|slice(0, 50) ~ '...' }}
-									{% endif %}
-									{% if checker == true %}
-										{% if campainReg.status == 0 %}
-											<span class='status pending'>Pending</span>
-										{% elseif campainReg.status == 1 %}
-											<span class='status accepted'>Accepted</span>
-										{% elseif campainReg.status == 2 %}
-											<span class='status completed'>Completed</span>
-										{% elseif campainReg.status == 3 %}
-											<span class='status refused'>Refused</span>
-										{% endif %}
-
-										<a class='white button pointer' href="{{ path("campains_single", {'campain': campain.id}) }}">See details</a>
-									{% else %}
-										<a class='register button' href="{{ path("campains_single", {'campain': campain.id}) }}">Ask to be a tester</a>
-									{% endif %}
-								</div>
-							</div>
+							{% include "_partials/card-campain.html.twig" %}
 						</div>
 					{% endfor %}
 				</div>
