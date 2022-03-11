@@ -4,6 +4,7 @@ namespace App\Controller\Admin\Campain;
 
 use App\Controller\Admin\AbstractBaseCrudController;
 use App\Entity\CampainRegistration;
+use App\Entity\User;
 use App\Repository\CampainRegistrationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
