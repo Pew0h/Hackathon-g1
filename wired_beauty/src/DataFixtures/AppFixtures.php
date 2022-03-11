@@ -2,22 +2,29 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\User;
 use App\Entity\Campain;
-use App\Entity\CampainRegistration;
 use App\Entity\Company;
 use App\Entity\Product;
-use App\Entity\User;
+use App\Entity\Question;
+use App\Controller\ExcelController;
+use App\Entity\CampainRegistration;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
     private $passwordEncoder;
-
-    public function __construct(UserPasswordHasherInterface $passwordEncoder)
+    private $em;
+    public function __construct(UserPasswordHasherInterface $passwordEncoder, EntityManagerInterface $em)
     {
         $this->passwordEncoder = $passwordEncoder;
+        $this->em = $em;
     }
 
     public function load(ObjectManager $manager): void
@@ -250,10 +257,13 @@ class AppFixtures extends Fixture
 
         ];
 
+        // $t = new ExcelController();
+
+        $file = new File("./public/Excels/fixtures.xlsx");
         foreach ($data_campain as $data) {
             $p = $products[rand(0, count($products) - 1)];
             $c = $p->getCompany();
-
+            $excelController = new ExcelController($this->em);
             $campain = new Campain();
             $campain
                 ->setName($data['name'])
@@ -261,13 +271,16 @@ class AppFixtures extends Fixture
                 ->setStartDate(new \DateTime($data['start_date']))
                 ->setEndDate(new \DateTime($data['end_date']))
                 ->setProduct($p)
-                ->setCompany($c);
-
+                ->setCompany($c)
+                ->setQcm($excelController->parseExcelToJson($file, $campain, 'Campain_1', true));
 
             $manager->persist($campain);
             $campains[] = $campain;
         };
 
         $manager->flush();
+
+        // $filesystem = new Filesystem();
+        // $filesystem->remove($file);
     }
 }

@@ -18,7 +18,7 @@ class Qcm
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
-    #[ORM\ManyToOne(inversedBy: 'qcm', targetEntity: Campain::class)]
+    #[ORM\ManyToOne(inversedBy: 'qcm', targetEntity: Campain::class, cascade: ["persist"])]
     #[ORM\JoinColumn(nullable: false)]
     private $campain;
 
