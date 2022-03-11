@@ -1,5 +1,6 @@
 import './admin-stats.scss'
 import './admin-app.scss'
+import './admin-app'
 import 'chart.js/dist/chart'
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
@@ -10,32 +11,36 @@ const labels = [
     'PF50+'
 ];
 
-const spfData = (document.getElementById('response').value).split(',');
-
-// Data of the graph
-const data = {
-    labels: labels,
-    datasets: [{
-        label: 'SPF stats',
-        backgroundColor: ['#A42C23', '#DB6A39', '#EDA687'],
-        borderColor: ['#A42C23', '#DB6A39', '#EDA687'],
-        data: spfData,
-    }]
-};
-
-// config of the graph
-const config = {
-    type: 'doughnut',
-    data: data,
-    options: {}
-};
+if (document.getElementById('response')) {
+    const spfData = (document.getElementById('response').value).split(',');
 
 
-// Init graph
-const chart = new Chart(
-    document.getElementById('myChart'),
-    config
-);
+    // Data of the graph
+    const data = {
+        labels: labels,
+        datasets: [{
+            label: 'SPF stats',
+            backgroundColor: ['#A42C23', '#DB6A39', '#EDA687'],
+            borderColor: ['#A42C23', '#DB6A39', '#EDA687'],
+            data: spfData,
+        }]
+    };
+
+    // config of the graph
+    const config = {
+        type: 'doughnut',
+        data: data,
+        options: {}
+    };
+
+
+    // Init graph
+    const chart = new Chart(
+        document.getElementById('myChart'),
+        config
+    );
+
+}
 
 function savePDF(title){
 
@@ -47,5 +52,4 @@ function savePDF(title){
         docPDF.save();
     });
 }
-
 window.savePDF = savePDF
