@@ -19,6 +19,8 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "chart.js": "^3.7.1"
+        "chart.js": "^3.7.1",
+        "html2canvas": "^1.4.1",
+        "jspdf": "^2.5.1"
     }
 }

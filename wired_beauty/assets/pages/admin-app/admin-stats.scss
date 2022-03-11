@@ -1,0 +1,46 @@
+:root {
+    --color-primary: #a42c23;
+    --color-secondary: #db6a39;
+    --color-black: #262626;
+    --color-gray: #a5a5a5;
+    --color-white: #fafafa;
+    --color-green: #3dd643;
+}
+
+
+
+a.button,
+input.button,
+.button {
+    min-height: 4.6rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 3rem;
+    color: var(--color-white);
+    background-color: var(--color-primary);
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.6rem;
+    border-radius: 23px;
+    border: .1rem solid var(--color-white);
+    cursor: pointer;
+    transition: all .2s;
+
+    &:hover {
+        --new-width: .2rem;
+        padding: calc(1rem - var(--new-width)) calc(3rem - var(--new-width));
+        border-width: calc(.1rem + var(--new-width));
+    }
+
+    &.white {
+        background-color: var(--color-white);
+        color: var(--color-primary);
+        border: 1px solid var(--color-primary);
+        cursor: initial;
+
+        &:hover {
+            padding: 1rem 3rem;
+        }
+    }
+}

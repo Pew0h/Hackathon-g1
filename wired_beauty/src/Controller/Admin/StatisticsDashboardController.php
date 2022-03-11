@@ -11,6 +11,7 @@ use App\Entity\Qcm;
 use App\Entity\Question;
 use App\Entity\User;
 use App\Entity\UserQcmResponse;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -23,10 +24,12 @@ class StatisticsDashboardController extends AbstractDashboardController
 {
 
     private $security;
+    private $em;
 
-    public function __construct(Security $security)
+    public function __construct(Security $security, EntityManagerInterface $em)
     {
         $this->security = $security;
+        $this->em = $em;
     }
 
     #[Route('/admin/statistics', name: 'admin_statistics')]
@@ -35,6 +38,7 @@ class StatisticsDashboardController extends AbstractDashboardController
         $user = $this->security->getUser();
         return $this->render('admin/statistics.html.twig', [
             "user"  => $user,
+            "response" => $this->spfUsersResponse()
         ]);
     }
 
@@ -54,8 +58,32 @@ class StatisticsDashboardController extends AbstractDashboardController
 
         return $assets
             ->addWebpackEncoreEntry('admin-app')
-            ->addJsFile('build/admin-app.js');
-        // ->addCssFile('build/admin-app.scss');
+            ->addJsFile('admin-app.js')
+            ->addWebpackEncoreEntry('admin-stats');
+    }
 
+    public function getUsersResponse(){
+        return $this->em->getRepository(UserQcmResponse::class)->findAll();
+    }
+
+    public function spfUsersResponse(){
+        $spf15 = 0;
+        $spf30 = 0 ;
+        $spf50p = 0;
+        foreach ($this->getUsersResponse() as $item) {
+            $response = json_decode($item->getContent(), true)['question_1']['value'];
+            switch ($response){
+                case 'PF15':
+                    $spf15++;
+                    break;
+                case 'PF30':
+                    $spf30++;
+                    break;
+                case 'PF50+':
+                    $spf50p++;
+                    break;
+            }
+            return $spf15 . ','  . $spf30 . ',' .  $spf50p;
+        }
     }
 }

@@ -132,9 +132,7 @@ class DashboardController extends AbstractDashboardController
         $assets = parent::configureAssets();
 
         return $assets
-            ->addWebpackEncoreEntry('admin-app')
-            ->addJsFile('build/admin-app.js');
-        // ->addCssFile('build/admin-app.scss');
+            ->addWebpackEncoreEntry('admin-stats');
 
     }
 }
