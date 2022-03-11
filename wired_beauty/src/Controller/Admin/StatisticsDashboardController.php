@@ -72,6 +72,7 @@ class StatisticsDashboardController extends AbstractDashboardController
         $spf50p = 0;
         foreach ($this->getUsersResponse() as $item) {
             $response = json_decode($item->getContent(), true)['question_1']['value'];
+
             switch ($response){
                 case 'PF15':
                     $spf15++;
@@ -83,7 +84,7 @@ class StatisticsDashboardController extends AbstractDashboardController
                     $spf50p++;
                     break;
             }
-            return $spf15 . ','  . $spf30 . ',' .  $spf50p;
         }
+        return $spf15 . ','  . $spf30 . ',' .  $spf50p;
     }
 }
