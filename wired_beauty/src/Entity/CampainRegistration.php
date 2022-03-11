@@ -34,7 +34,7 @@ class CampainRegistration
 
     public function __toString()
     {
-        return $this->campain . " " . $this->tester;
+        return $this->campain . " | " . $this->tester->getFullname();
     }
 
     public function getId(): ?int

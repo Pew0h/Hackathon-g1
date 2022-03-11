@@ -98,7 +98,7 @@ class DashboardController extends AbstractDashboardController
             // triggers an error. If this causes any issue in your backend, call this method
             // to disable this feature and remove all URL signature checks
             ->disableUrlSignatures()
-            ->renderContentMaximized()
+            // ->renderContentMaximized()
 
             // by default, all backend URLs are generated as absolute URLs. If you
             // need to generate relative URLs instead, call this method
@@ -107,10 +107,12 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        yield MenuItem::linkToRoute('Dashboard', 'fa fa-home', "admin");
         yield MenuItem::linkToCrud("Users", "fa fa-users", User::class);
         yield MenuItem::linkToCrud("Companies", "fa fa-building", Company::class);
         yield MenuItem::linkToCrud("Products", "fa fa-cubes", Product::class);
+        yield MenuItem::section();
+        yield MenuItem::linkToRoute('Statistics', 'fa fa-chart-pie', "admin_statistics");
         yield MenuItem::section();
         yield MenuItem::subMenu("Campains", "fa fa-chart-bar")->setSubItems([
             MenuItem::linkToCrud("Campains list", "fa fa-chart-bar", Campain::class),
@@ -130,9 +132,7 @@ class DashboardController extends AbstractDashboardController
         $assets = parent::configureAssets();
 
         return $assets
-            ->addWebpackEncoreEntry('admin-app')
-            ->addJsFile('build/admin-app.js');
-        // ->addCssFile('build/admin-app.scss');
+            ->addWebpackEncoreEntry('admin-stats');
 
     }
 }

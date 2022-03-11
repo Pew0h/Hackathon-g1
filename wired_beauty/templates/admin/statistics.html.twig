@@ -1,0 +1,18 @@
+{% extends 'admin/_partials/content.html.twig' %}
+
+{% block page_title 'Statistics' %}
+
+{% block body_class 'page-content page-content-with-padding page-dashboard' %}
+
+{% block page_content %}
+	<div class="dashboard-statistics">
+		<h3 style="text-align: center">SPF stats of all users responses</h3>
+
+		<div style="margin: auto; width: 400px; height: 400px;">
+			<canvas id="myChart"></canvas>
+		</div>
+		<button class="button" onclick="savePDF('SPF stats of all users responses')">Get PDF</button>
+		<input type="hidden" id="response" value="{{ response }}">
+	</div>
+
+{% endblock %}
