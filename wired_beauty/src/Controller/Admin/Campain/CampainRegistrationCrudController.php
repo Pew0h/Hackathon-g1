@@ -21,6 +21,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\ArrayFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\ChoiceFilter;
+use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\TextFilter;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -44,6 +45,7 @@ class CampainRegistrationCrudController extends AbstractBaseCrudController
     public function configureFilters(Filters $filters): Filters
     {
         return $filters
+            ->add(EntityFilter::new('campain'))
             ->add(ChoiceFilter::new('status')->setChoices([
                 "Pending" => CampainRegistration::STATUS_PENDING,
                 "Accepted" => CampainRegistration::STATUS_ACCEPTED,

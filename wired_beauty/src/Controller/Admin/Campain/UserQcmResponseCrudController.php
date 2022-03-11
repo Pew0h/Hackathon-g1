@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 
 class UserQcmResponseCrudController extends AbstractBaseCrudController
 {
@@ -25,7 +26,7 @@ class UserQcmResponseCrudController extends AbstractBaseCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            ArrayField::new('content'),
+            TextEditorField::new('content'),
             AssociationField::new('campainRegistration'),
         ];
     }

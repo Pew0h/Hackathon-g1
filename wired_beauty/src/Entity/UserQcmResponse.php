@@ -20,14 +20,19 @@ class UserQcmResponse
     #[ORM\JoinColumn(nullable: false)]
     private $campainRegistration;
 
+    public function __toString()
+    {
+        return $this->id;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getContent(): ?array
+    public function getContent(): ?string
     {
-        return $this->content;
+        return json_encode($this->content, JSON_PRETTY_PRINT);
     }
 
     public function setContent(array $content): self
