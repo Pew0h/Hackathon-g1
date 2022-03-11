@@ -61,6 +61,10 @@ class CampainsListingController extends AbstractController
         $questions = [];
         $user = $this->security->getUser();
 
+        if (isset($_GET["register"]) && $_GET["register"] == "true") {
+            $this->registerToCampain($campain->getId());
+        }
+
         if ($campain) {
             $error = false;
 
@@ -74,6 +78,7 @@ class CampainsListingController extends AbstractController
                 }
             }
 
+            // generate form & save it
             if ($status && $status == 1) {
                 if ($campain->getQcm()) {
                     $userQcmResponse = new UserQcmResponse();
@@ -99,6 +104,7 @@ class CampainsListingController extends AbstractController
                     $form = $form->getForm();
                     $form->handleRequest($request);
 
+                    // wave form
                     if ($form->isSubmitted()) {
                         $userQcmResponse->setCampainRegistration($campainRegistration);
                         $data = [];
@@ -119,10 +125,6 @@ class CampainsListingController extends AbstractController
                     }
                 }
             }
-        }
-
-        if (isset($_GET["register"]) && $_GET["register"] == "true") {
-            $this->registerToCampain($campain->getId());
         }
        
         if ($error === false) {
@@ -170,26 +172,30 @@ class CampainsListingController extends AbstractController
         ]);
     }
 
-    public function registerToCampain($id)
+    #[Route('/register-campain/{campain}', name: 'register_campain')]
+    public function registerToCampain(Campain $campain)
     {
         $user = $this->security->getUser();
-        $campain = $this->em->getRepository(Campain::class)->find($id);
+
         if ($campain && $user) {
             $checker = false;
             foreach ($user->getCampainRegistrations() as $user_reg) {
-                if ($user_reg->getCampain()->getId() == $id) $checker = true;
+                if ($user_reg->getCampain()->getId() == $campain->getId()) $checker = true;
             }
             if ($checker === false) {
                 $campainRegistration = new CampainRegistration();
-                $campainRegistration->setStatus(0)
+                $campainRegistration
+                    ->setStatus(0)
                     ->setCampain($campain)
                     ->setTester($user);
+
                 $this->em->persist($campainRegistration);
                 $this->em->flush($campainRegistration);
             }
         }
 
-        header('Location: /campains/single?campain_id=' . $id);
-        exit;
+        return $this->redirectToRoute('campains_single', [
+            'campain' => $campain->getId()
+        ]);
     }
 }
