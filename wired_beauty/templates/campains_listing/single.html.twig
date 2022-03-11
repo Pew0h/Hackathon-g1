@@ -59,14 +59,15 @@
 
 				<h3>Description</h3>
 				<p class="campain__description">{{ campain.description|raw }}</p>
-
-				<div class="campain__product-container">
-					<h3 class="campain__company-container__title">{{ campain.product.name }}</h3>
-					{% if campain.product.image %}
-						<img class="campain__company-container__image" src="{{ asset("/uploads/" ~ campain.product.image) }}" alt="">
-					{% endif %}
-					<p class="campain__product-container__content">{{ campain.product.description|raw }}</p>
-				</div>
+				{% if campain.product %}
+					<div class="campain__product-container">
+						<h3 class="campain__company-container__title">{{ campain.product.name }}</h3>
+						{% if campain.product.image %}
+							<img class="campain__company-container__image" src="{{ asset("/uploads/" ~ campain.product.image) }}" alt="">
+						{% endif %}
+						<p class="campain__product-container__content">{{ campain.product.description|raw }}</p>
+					</div>
+				{% endif %}
 
 				{% if already_asked %}
 					{% if s is same as(1) and campain.qcm %}
