@@ -134,5 +134,6 @@ class DashboardController extends AbstractDashboardController
         return $assets
             ->addWebpackEncoreEntry('admin-stats');
 
+
     }
 }
